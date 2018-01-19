@@ -134,7 +134,7 @@
     </build>
 
     <properties>
-        <cassandra.diver.version>3.1.2</cassandra.diver.version>
+        <cassandra.diver.version>3.3.2</cassandra.diver.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

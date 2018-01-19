@@ -24,8 +24,12 @@ import org.wso2.siddhi.query.api.definition.Attribute;
  * condition evaluation. All kinds will contain a variable type.
  */
 public abstract class Operand {
-    Attribute.Type type;
+    protected Attribute.Type type;
 
+    /**
+     * This method is to return type of the attribute.
+     * @return the type of the variable
+     */
     public Attribute.Type getType() {
         return type;
     }
@@ -41,6 +45,10 @@ public abstract class Operand {
             this.type = type;
         }
 
+        /**
+         * This method is used to return the name of the stream variable.
+         * @return name of the stream variable
+         */
         public String getName() {
             return name;
         }

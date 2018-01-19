@@ -409,9 +409,9 @@ public class DefineCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    // to run this test a keyspace with wso2_SP need to be created
-    @Test(testName = "cassandratabledefinitiontest6", description = "test with default keyspace and table",
-            dependsOnMethods = "cassandratabledefinitiontest5")
+    // to run this test a keyspace with wso2sp need to be created
+    @Test(testName = "cassandratabledefinitiontest6", description = "test with default keyspace and table"/*,
+            dependsOnMethods = "cassandratabledefinitiontest5"*/)
     public void cassandratabledefinitiontest6() throws InterruptedException {
         //Defining a cassandra table without an explicit column family.
         log.info("cassandratabledefinitiontest6");

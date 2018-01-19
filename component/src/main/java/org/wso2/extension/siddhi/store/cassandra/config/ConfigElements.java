@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * This class is to map the xml elements with the cassandra-table-config.xml file and to get the
  * cassandra queries when needed.
  */
-@XmlRootElement
+@XmlRootElement(name = "configElements")
 public class ConfigElements {
     private String tableCreateQuery;
     private String tableCheckQuery;
@@ -42,88 +42,87 @@ public class ConfigElements {
         return tableCreateQuery;
     }
 
-    @XmlElement
     public void setTableCreateQuery(String tableCreateQuery) {
         this.tableCreateQuery = tableCreateQuery;
     }
 
+    @XmlElement
     public String getTableCheckQuery() {
         return tableCheckQuery;
     }
 
-    @XmlElement
     public void setTableCheckQuery(String tableCheckQuery) {
         this.tableCheckQuery = tableCheckQuery;
     }
 
+    @XmlElement
     public String getTableValidityQuery() {
         return tableValidityQuery;
     }
 
-    @XmlElement
     public void setTableValidityQuery(String tableValidityQuery) {
         this.tableValidityQuery = tableValidityQuery;
     }
 
+    @XmlElement
     public String getIndexQuery() {
         return indexQuery;
     }
 
-    @XmlElement
     public void setIndexQuery(String indexQuery) {
         this.indexQuery = indexQuery;
     }
 
+    @XmlElement
     public String getRecordExistQuery() {
         return recordExistQuery;
     }
 
-    @XmlElement
     public void setRecordExistQuery(String recordExistQuery) {
         this.recordExistQuery = recordExistQuery;
     }
 
+    @XmlElement
     public String getRecordDeleteQuery() {
         return recordDeleteQuery;
     }
 
-    @XmlElement
     public void setRecordDeleteQuery(String recordDeleteQuery) {
         this.recordDeleteQuery = recordDeleteQuery;
     }
 
+    @XmlElement
     public String getRecordInsertQuery() {
         return recordInsertQuery;
     }
 
-    @XmlElement
     public void setRecordInsertQuery(String recordInsertQuery) {
         this.recordInsertQuery = recordInsertQuery;
     }
 
+    @XmlElement
     public String getRecordSelectQuery() {
         return recordSelectQuery;
     }
 
-    @XmlElement
     public void setRecordSelectQuery(String recordSelectQuery) {
         this.recordSelectQuery = recordSelectQuery;
     }
 
+    @XmlElement
     public String getRecordSelectNoKeyTable() {
         return recordSelectNoKeyTable;
     }
 
-    @XmlElement
     public void setRecordSelectNoKeyTable(String recordSelectNoKeyTable) {
         this.recordSelectNoKeyTable = recordSelectNoKeyTable;
     }
 
+    @XmlElement
     public String getRecordUpdateQuery() {
         return recordUpdateQuery;
     }
 
-    @XmlElement
     public void setRecordUpdateQuery(String recordUpdateQuery) {
         this.recordUpdateQuery = recordUpdateQuery;
     }

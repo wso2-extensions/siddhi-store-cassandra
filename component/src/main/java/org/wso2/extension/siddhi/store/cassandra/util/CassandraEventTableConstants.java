@@ -26,7 +26,7 @@ public class CassandraEventTableConstants {
     public static final String ANNOTATION_ELEMENT_TABLE_NAME = "table.name";
     public static final String ANNOTATION_ELEMENT_KEY_SPACE = "keyspace";
     public static final String ANNOTATION_HOST = "cassandra.host";
-    public static final String DEFAULT_KEY_SPACE = "wso2_SP";
+    public static final String DEFAULT_KEY_SPACE = "wso2sp";
     public static final String ANNOTATION_USER_NAME = "username";
     public static final String ANNOTATION_PASSWORD = "password";
 
