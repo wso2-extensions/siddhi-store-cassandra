@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * This class is to map the xml elements with the cassandra-table-config.xml file and to get the
  * cassandra queries when needed.
  */
-@XmlRootElement(name = "configElements")
-public class ConfigElements {
+@XmlRootElement(name = "cassandraStoreConfig")
+public class CassandraStoreConfig {
     private String tableCreateQuery;
     private String tableCheckQuery;
     private String tableValidityQuery;

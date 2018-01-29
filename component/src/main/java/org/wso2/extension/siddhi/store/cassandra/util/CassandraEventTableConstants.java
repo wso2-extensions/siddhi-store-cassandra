@@ -31,22 +31,25 @@ public class CassandraEventTableConstants {
     public static final String ANNOTATION_PASSWORD = "password";
 
     //Miscellaneous CQL constants
+    public static final String CQL_FILTERING = "ALLOW FILTERING";
     public static final String CQL_LESS_THAN = "<";
     public static final String CQL_GREATER_THAN = ">";
     public static final String CQL_LESS_THAN_EQUAL = "<=";
     public static final String CQL_GREATER_THAN_EQUAL = ">=";
     public static final String CQL_COMPARE_EQUAL = "=";
     public static final String CQL_AND = "AND";
+    public static final String CQL_ID = "\"_id\"";
     public static final String CQL_IN = "IN";
     public static final String CQL_PRIMARY_KEY_DEF = "PRIMARY KEY";
+    public static final String CQL_TEXT = "text";
     public static final String CQL_WHERE = "WHERE";
-    public static final String CQL_FILTERING = "ALLOW FILTERING";
     public static final String WHITESPACE = " ";
     public static final String SEPARATOR = ",";
     public static final String EQUALS = "=";
     public static final String QUESTION_MARK = "?";
     public static final String OPEN_PARENTHESIS = "(";
     public static final String CLOSE_PARENTHESIS = ")";
+    public static final String CONFIG_FILE = "cassandra-table-config.xml";
 
     public static final String PLACEHOLDER_COLUMNS = "{{COLUMNS}}";
     public static final String PLACEHOLDER_PRIMARY_KEYS = "{{PRIMARY_KEYS}}";

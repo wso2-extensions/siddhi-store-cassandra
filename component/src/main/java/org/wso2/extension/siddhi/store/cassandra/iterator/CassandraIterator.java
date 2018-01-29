@@ -84,13 +84,7 @@ public class CassandraIterator implements RecordIterator<Object[]> {
     @Override
     public Object[] next() {
         Row row = cassandraIterator.next();
-        /*List<Object> results = row.getList(index, Object.class);
-        index++;*/
-        try {
-            return extractRecord(row);
-        } catch (IOException | ClassNotFoundException ex) {
-            throw new CassandraTableException("Something went wrong when retrieving an object", ex);
-        }
+        return extractRecord(row);
     }
 
     /**
@@ -101,9 +95,9 @@ public class CassandraIterator implements RecordIterator<Object[]> {
      * @return an array of extracted values, all cast to {@link Object} type for portability.
      *             to the table definition
      */
-    private Object[] extractRecord(Row row) throws IOException, ClassNotFoundException {
+    private Object[] extractRecord(Row row) {
         List<Object> result = new ArrayList<>();
-        for (Attribute attribute : this.attributes) {
+        this.attributes.forEach(attribute -> {
             switch (attribute.getType()) {
                 case BOOL:
                     result.add(row.getBool(attribute.getName()));
@@ -115,7 +109,11 @@ public class CassandraIterator implements RecordIterator<Object[]> {
                     result.add(row.getFloat(attribute.getName()));
                     break;
                 case INT:
-                    result.add(objectDataReadResolver(row, attribute.getName()));
+                    try {
+                        result.add(objectDataReadResolver(row, attribute.getName()));
+                    } catch (IOException | ClassNotFoundException ex) {
+                        throw new CassandraTableException("Something went wrong when retrieving an object", ex);
+                    }
                     break;
                 case LONG:
                     result.add(row.getLong(attribute.getName()));
@@ -129,10 +127,11 @@ public class CassandraIterator implements RecordIterator<Object[]> {
                 default:
                     //Operation not supported
             }
-        }
+        });
         return result.toArray();
     }
 
+    // TODO: 1/23/18 check whether this is needed
     private Object objectDataReadResolver(Row row, String attributeName) throws IOException, ClassNotFoundException {
         ByteBuffer data = row.getBytes(attributeName);
         ByteArrayInputStream bis = new ByteArrayInputStream(data.array());

@@ -44,7 +44,7 @@
         <td style="vertical-align: top; word-wrap: break-word">User need to give the keyspace that the data is persisted. It is ven by the keyspace parameter</td>
         <td style="vertical-align: top">'stockTable'</td>
         <td style="vertical-align: top">STRING</td>
-        <td style="vertical-align: top">Yes</td>
+        <td style="vertical-align: top">No</td>
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>

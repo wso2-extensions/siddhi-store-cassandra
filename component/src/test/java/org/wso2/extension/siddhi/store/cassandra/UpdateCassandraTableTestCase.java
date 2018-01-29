@@ -388,7 +388,7 @@ public class UpdateCassandraTableTestCase {
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
     }
-//kkk
+
     @Test(dependsOnMethods = "updateFromTableTest4")
     public void updateFromTableTest5() throws InterruptedException {
         // Check update operations with primary keys not in EQUALS form.

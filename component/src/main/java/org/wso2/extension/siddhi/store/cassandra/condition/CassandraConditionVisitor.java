@@ -215,6 +215,7 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
         return cqlOPStr;
     }
 
+    // TODO: 1/23/18 throw exceptions in math operations and others
     @Override
     public void endVisitCompareRightOperand(Compare.Operator operator) {
         //Not applicable

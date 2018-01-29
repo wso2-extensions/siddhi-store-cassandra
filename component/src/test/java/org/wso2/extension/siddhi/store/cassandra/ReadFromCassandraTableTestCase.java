@@ -63,7 +63,7 @@ public class ReadFromCassandraTableTestCase {
 
     @Test
     public void readEventCassandraTableTestCase1() throws InterruptedException {
-        //Read events from a RDBMS table successfully
+        //Read events from a Cassandra table successfully
         log.info("readEventCassandraTableTestCase1");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
@@ -133,34 +133,10 @@ public class ReadFromCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(testName = "readEventCassandraTestCase1", dependsOnMethods = "readEventCassandraTableTestCase1")
-    public void readEventCassandraTestCase2() throws InterruptedException {
-        //Read events from a non existing RDBMS table unsuccessfully
-        log.info("readEventCassandraTestCase2");
-        SiddhiManager siddhiManager = new SiddhiManager();
-        String streams = "define stream FooStream (name string, category string, volume long);\n" +
-                "define table StockTable (itemId string, type string, volume long);\n";
-
-        String query =
-                "@info(name = 'query1')\n" +
-                        "from FooStream#window.length(1) join StockTable on FooStream.name==StockTable.itemId \n" +
-                        "select FooStream.name as checkName, StockTable.type as checkCategory, " +
-                        "StockTable.volume as checkVolume\n" +
-                        "insert into OutputStream;";
-
-        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(streams + query);
-        InputHandler fooStream = siddhiAppRuntime.getInputHandler("FooStream");
-        siddhiAppRuntime.start();
-        fooStream.send(new Object[]{"WSO2"});
-        fooStream.send(new Object[]{"IBM"});
-        Thread.sleep(1000);
-        siddhiAppRuntime.shutdown();
-    }
-
-    @Test(dependsOnMethods = "readEventCassandraTestCase2")
-    public void readEventCassandraTableTestCase3() throws InterruptedException {
-        //Read events from a HBase table through a non existing stream unsuccessfully
-        log.info("readEventCassandraTableTestCase3");
+    @Test(dependsOnMethods = "readEventCassandraTableTestCase1")
+    public void readEventCassandraTableTestCase2() throws InterruptedException {
+        //Read events from a Cassandra table through a non existing stream unsuccessfully
+        log.info("readEventCassandraTableTestCase2");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
                 "define stream FooStream (name string, category string, volume long);" +
@@ -198,10 +174,10 @@ public class ReadFromCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(dependsOnMethods = "readEventCassandraTableTestCase3")
-    public void readEventCassandraTableTestCase4() throws InterruptedException {
-        //Read multiple events from a HBase table successfully with windows.length.
-        log.info("readEventCassandraTableTestCase4");
+    @Test(dependsOnMethods = "readEventCassandraTableTestCase2")
+    public void readEventCassandraTableTestCase3() throws InterruptedException {
+        //Read multiple events from a Cassandra table successfully with windows.length.
+        log.info("readEventCassandraTableTestCase3");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
                 "define stream FooStream (name string, category string, volume long);\n" +
@@ -286,10 +262,10 @@ public class ReadFromCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(dependsOnMethods = "readEventCassandraTableTestCase4")
-    public void readEventCassandraTableTestCase5() throws InterruptedException {
+    @Test(dependsOnMethods = "readEventCassandraTableTestCase3")
+    public void readEventCassandraTableTestCase4() throws InterruptedException {
         //Read multiple events from a Cassandra table successfully with windows.length.
-        log.info("readEventCassandraTableTestCase5");
+        log.info("readEventCassandraTableTestCase4");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
                 "define stream FooStream (name string, category string, volume long);\n" +
@@ -367,10 +343,10 @@ public class ReadFromCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(dependsOnMethods = "readEventCassandraTableTestCase5")
-    public void readEventCassandraTableTestCase6() throws InterruptedException {
+    @Test(dependsOnMethods = "readEventCassandraTableTestCase4")
+    public void readEventCassandraTableTestCase5() throws InterruptedException {
         //Read events from a Cassandra table successfully with aggregate function.
-        log.info("readEventCassandraTableTestCase6");
+        log.info("readEventCassandraTableTestCase5");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
                 "define stream FooStream (name string, category string, volume long);\n" +
