@@ -12,8 +12,8 @@ google_analytics:
 - UA-103065-28
 - auto
 pages:
-- Welcome to WSO2 Siddhi Store HBase: index.md
+- Welcome to WSO2 Siddhi Store Cassandra: index.md
 - API Docs:
-  - 4.0.0-M14-SNAPSHOT: api/4.0.0-M14-SNAPSHOT.md
+  - 4.0.0-M14-SNAPSHOT: api/1.0.0-SNAPSHOT.md
 - License: license.md
 theme: material
