@@ -64,7 +64,7 @@ public class CassandraTableUtils {
         schema.forEach(attribute -> keys.stream()
                 .filter(key -> key.trim().equals(attribute.getName().trim()))
                 .forEach(key -> primaryKeyList.add(attribute)));
-        if (primaryKeyList.size() == 0) {
+        if (primaryKeyList.isEmpty()) {
             throw new CassandraTableException("Please enter a primary within the defined table columns");
         }
         return primaryKeyList;

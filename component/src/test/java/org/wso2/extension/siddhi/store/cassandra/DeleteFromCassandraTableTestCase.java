@@ -263,7 +263,7 @@ public class DeleteFromCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(description = "deleteFromCassandraTableTest5")
+    @Test(description = "deleteFromCassandraTableTest5", dependsOnMethods = "deleteFromCassandraTableTest5")
     public void deleteFromCassandraTableTest6() throws InterruptedException {
         // Testing simple deletion with primary keys with stream variable name aliases.
         SiddhiManager siddhiManager = new SiddhiManager();

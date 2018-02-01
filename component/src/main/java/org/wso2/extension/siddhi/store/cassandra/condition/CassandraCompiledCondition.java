@@ -19,7 +19,7 @@ package org.wso2.extension.siddhi.store.cassandra.condition;
 
 import org.wso2.siddhi.core.util.collection.operator.CompiledCondition;
 
-import java.util.Map;
+import java.util.SortedMap;
 
 /**
  * Implementation class of {@link CompiledCondition} corresponding to the Cassandra Event Table.
@@ -28,10 +28,10 @@ import java.util.Map;
  */
 public class CassandraCompiledCondition implements CompiledCondition {
     private String compiledQuery;
-    private Map<Integer, Object> parameters;
+    private SortedMap<Integer, Object> parameters;
     private boolean readOnlyCondition;
 
-    public CassandraCompiledCondition(String compiledQuery, Map<Integer, Object> parameters,
+    public CassandraCompiledCondition(String compiledQuery, SortedMap<Integer, Object> parameters,
                                       boolean readOnlyCondition) {
         this.compiledQuery = compiledQuery;
         this.parameters = parameters;
@@ -51,7 +51,7 @@ public class CassandraCompiledCondition implements CompiledCondition {
         return getCompiledQuery();
     }
 
-    public Map<Integer, Object> getParameters() {
+    public SortedMap<Integer, Object> getParameters() {
         return parameters;
     }
     public boolean getReadOnlyCondition() {

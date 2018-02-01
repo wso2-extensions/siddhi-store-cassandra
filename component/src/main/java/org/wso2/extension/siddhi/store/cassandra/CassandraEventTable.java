@@ -81,13 +81,13 @@ import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTable
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CLOSE_PARENTHESIS;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CONFIG_FILE;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CQL_AND;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CQL_EQUALS;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CQL_FILTERING;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CQL_ID;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CQL_PRIMARY_KEY_DEF;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CQL_TEXT;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CQL_WHERE;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.DEFAULT_KEY_SPACE;
-import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.EQUALS;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.OPEN_PARENTHESIS;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.PLACEHOLDER_COLUMNS;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.
@@ -102,8 +102,15 @@ import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTable
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.PLACEHOLDER_TABLE;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.QUESTION_MARK;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.SEPARATOR;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.TABLE_PROPERTY_CLUSTERING_KEY;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.TABLE_PROPERTY_COLUMN_NAME;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.TABLE_PROPERTY_KIND;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.TABLE_PROPERTY_PARTITION_KEY;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.TABLE_PROPERTY_TYPE;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.WHITESPACE;
+
 import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
+
 
 
 /**
@@ -192,12 +199,12 @@ public class CassandraEventTable extends AbstractRecordTable {
                 tableDefinition.getAnnotations());
         this.indexAnnotation = AnnotationHelper.getAnnotation(SiddhiConstants.ANNOTATION_INDEX_BY,
                 tableDefinition.getAnnotations());
-        String tableName = storeAnnotation.getElement(ANNOTATION_ELEMENT_TABLE_NAME);
-        String keyspace = storeAnnotation.getElement(ANNOTATION_ELEMENT_KEY_SPACE);
-        LOG.info("Table " + tableName + " is initialized");
-        this.tableName = CassandraTableUtils.isEmpty(tableName) ? tableDefinition.getId() : tableName;
+        String storeAnnTableName = storeAnnotation.getElement(ANNOTATION_ELEMENT_TABLE_NAME);
+        String storeAnnKeyspace = storeAnnotation.getElement(ANNOTATION_ELEMENT_KEY_SPACE);
+        LOG.info("Table " + storeAnnTableName + " is initialized");
+        this.tableName = CassandraTableUtils.isEmpty(storeAnnTableName) ? tableDefinition.getId() : storeAnnTableName;
         this.host = storeAnnotation.getElement(ANNOTATION_HOST);
-        this.keyspace = CassandraTableUtils.isEmpty(keyspace) ? DEFAULT_KEY_SPACE : keyspace;
+        this.keyspace = CassandraTableUtils.isEmpty(storeAnnKeyspace) ? DEFAULT_KEY_SPACE : storeAnnKeyspace;
 
         // loading cassandra config file
         try {
@@ -223,14 +230,13 @@ public class CassandraEventTable extends AbstractRecordTable {
     @Override
     protected void add(List<Object[]> records) throws ConnectionUnavailableException {
         PreparedStatement preparedStatement = this.session.prepare(this.addDataQuerySt);
-        for (Object record[] : records) {
-            if (this.objectAttributes.size() != 0) {
+        for (Object[] record : records) {
+            if (!this.objectAttributes.isEmpty()) {
                 this.objectAttributes.forEach(columnNo -> {
                     Object oldData = record[columnNo];
                     try {
-                        // TODO: 1/23/18 object is not supported
                         record[columnNo] = this.resolveObjectData(oldData);
-                    } catch (IOException | ConnectionUnavailableException ex) {
+                    } catch (IOException ex) {
                         throw new CassandraTableException("Error in object insertion ensure that the objects " +
                                 "are serializable.", ex);
                     }
@@ -273,7 +279,7 @@ public class CassandraEventTable extends AbstractRecordTable {
         PreparedStatement preparedStatement  = this.session.prepare(cql);
         BoundStatement boundStatement = preparedStatement.bind(argSet);
         ResultSet rs = this.session.execute(boundStatement);
-        return !(rs.one() == null);
+        return (rs.one() != null);
     }
 
     @Override
@@ -343,7 +349,7 @@ public class CassandraEventTable extends AbstractRecordTable {
             } else if (this.noKeyTable) {
                 // need to search the rows and update them
                 List<String> ids = this.findAllIDs(updateCondition, updateConditionParameterMaps.get(i));
-                if (ids.size() == 0) {
+                if (ids.isEmpty()) {
                     // need to insert
                     this.updateOrAddToNoKeyTable(updateSetParameterMap);
                 } else {
@@ -353,7 +359,7 @@ public class CassandraEventTable extends AbstractRecordTable {
             } else {
                 // updating key defined table
                 List<Object[]> ids = this.findAllUserDefinedIDs(updateCondition, updateConditionParameterMaps.get(i));
-                if (ids.size() == 0) {
+                if (ids.isEmpty()) {
                     // Since we do not know the primary key this operation cannot be done
                     throw new CassandraTableException("No results found for the given values. Only update " +
                             "functionality is capable without primary keys. If update or insert operation is needed" +
@@ -383,9 +389,8 @@ public class CassandraEventTable extends AbstractRecordTable {
     @Override
     protected void connect() throws ConnectionUnavailableException {
         //creating Cluster object
-        String username, password;
-        username = this.storeAnnotation.getElement(ANNOTATION_USER_NAME);
-        password = this.storeAnnotation.getElement(ANNOTATION_PASSWORD);
+        String username = this.storeAnnotation.getElement(ANNOTATION_USER_NAME);
+        String password = this.storeAnnotation.getElement(ANNOTATION_PASSWORD);
         Cluster cluster = Cluster.builder().addContactPoint(host).withCredentials(username, password).build();
         // NoHostAvailableException: All host(s) tried for query failed   when the connection is not established..
         // Runtime error thrown
@@ -403,16 +408,16 @@ public class CassandraEventTable extends AbstractRecordTable {
 
     @Override
     protected void destroy() {
+        // This is not supported in cassandra
     }
 
     /**
      * This method is used to convert an object to a byte array to be persisted as a blob data
      * @param cellData data that is in a cell of a column
      * @return Object in a the form of bytes
-     * @throws ConnectionUnavailableException exception thrown when the connection cannot be established
      * @throws IOException exception thrown in a IO operation failure
      */
-    private Object resolveObjectData(Object cellData) throws ConnectionUnavailableException, IOException {
+    private Object resolveObjectData(Object cellData) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutput out = new ObjectOutputStream(bos);
         out.writeObject(cellData);
@@ -427,9 +432,8 @@ public class CassandraEventTable extends AbstractRecordTable {
      * @param record records that need to be added to the table, each Object[] represent a record and it will match
      * the attributes of the Table Definition passed by the add method in CassandraEventTable.
      * @param preparedStatement prepared statement to insert data
-     * @throws ConnectionUnavailableException exception thrown when the connection cannot be established
      */
-    private void addData(Object[] record, PreparedStatement preparedStatement) throws ConnectionUnavailableException {
+    private void addData(Object[] record, PreparedStatement preparedStatement) {
         // Need to decide whether this table has a primary key. If there is a primary key
         // then the primary key annotation should n`t be null
         BoundStatement bound;
@@ -455,7 +459,7 @@ public class CassandraEventTable extends AbstractRecordTable {
     private Object[] constructArgSet(CompiledCondition compiledCondition,
                                      Map<String, Object> conditionParameterMap) {
         CassandraCompiledCondition cassandraCompiledCondition = (CassandraCompiledCondition) compiledCondition;
-        Map<Integer, Object> compiledParameters = cassandraCompiledCondition.getParameters();
+        SortedMap<Integer, Object> compiledParameters = cassandraCompiledCondition.getParameters();
         Object[] argSet = new Object[compiledParameters.size()];
         int i = 0;
         for (SortedMap.Entry<Integer, Object> entry : compiledParameters.entrySet()) {
@@ -543,7 +547,7 @@ public class CassandraEventTable extends AbstractRecordTable {
      */
     private void executeAsBatchNoIdDelete(List<String> ids) {
         BatchStatement batchStatement = new BatchStatement();
-        String condition = CQL_ID + EQUALS + QUESTION_MARK;
+        String condition = CQL_ID + CQL_EQUALS + QUESTION_MARK;
         String deleteQuery = this.cassandraStoreConfig.getRecordDeleteQuery().
                 replace(PLACEHOLDER_KEYSPACE, this.keyspace).
                 replace(PLACEHOLDER_TABLE, this.tableName).replace(PLACEHOLDER_CONDITION, condition);
@@ -566,7 +570,7 @@ public class CassandraEventTable extends AbstractRecordTable {
         StringBuilder condition = new StringBuilder();
         // building the condition statement
         for (Map.Entry<String, String> persistedColumn : this.persistedKeyColumns.entrySet()) {
-            condition.append(persistedColumn.getKey()).append(EQUALS).append(QUESTION_MARK);
+            condition.append(persistedColumn.getKey()).append(CQL_EQUALS).append(QUESTION_MARK);
             if (i != this.persistedKeyColumns.size() - 1) {
                 condition.append(WHITESPACE).append(CQL_AND).append(WHITESPACE);
             }
@@ -595,7 +599,6 @@ public class CassandraEventTable extends AbstractRecordTable {
         // keys that are in the condition as well as the set parameters
         // these should be removed
         List<String> keys = new ArrayList<>();
-        // TODO: 1/24/18 add java 8 lamda
         updateParameterMap.forEach((parameter, value) -> {
             if (this.persistedKeyColumns.containsKey(parameter)) {
                 keys.add(parameter);
@@ -628,7 +631,7 @@ public class CassandraEventTable extends AbstractRecordTable {
     private void executeAsBatchNoIdUpdate(List<String> ids, Map<String, Object> updateParameterMap) {
         BatchStatement batchStatement = new BatchStatement();
         List<Object> setValues = this.buildCQLUpdateSetStatement(updateParameterMap);
-        String condition = CQL_ID + EQUALS + QUESTION_MARK;
+        String condition = CQL_ID + CQL_EQUALS + QUESTION_MARK;
         String finalUpdateQuery = this.updateQuery.replace(PLACEHOLDER_CONDITION, condition);
         PreparedStatement preparedStatement = session.prepare(finalUpdateQuery);
         ids.forEach(id -> {
@@ -649,7 +652,7 @@ public class CassandraEventTable extends AbstractRecordTable {
      */
     private void deleteSingleRow(Map<String, Object> deleteConditionParameterMap,
                                  CompiledCondition compiledCondition, String deleteQuery) {
-        Object argSet[] = this.constructArgSet(compiledCondition, deleteConditionParameterMap);
+        Object[] argSet = this.constructArgSet(compiledCondition, deleteConditionParameterMap);
         //InvalidQueryException may take place if the defined if the condition doeas not have keys :Throw exception.
         PreparedStatement preparedStatement = this.session.prepare(deleteQuery);
         BoundStatement bound = preparedStatement.bind(argSet);
@@ -709,7 +712,7 @@ public class CassandraEventTable extends AbstractRecordTable {
         StringBuilder updateParameterString = new StringBuilder();
         int size = updateParameterMap.size();
         for (Map.Entry<String, Object> parameter : updateParameterMap.entrySet()) {
-            updateParameterString.append(parameter.getKey()).append(EQUALS).append(QUESTION_MARK);
+            updateParameterString.append(parameter.getKey()).append(CQL_EQUALS).append(QUESTION_MARK);
             setValues.add(parameter.getValue());
             if (i != size) {
                 updateParameterString.append(SEPARATOR);
@@ -732,7 +735,7 @@ public class CassandraEventTable extends AbstractRecordTable {
         int i = 1;
         // builds the condition
         for (Map.Entry<String, String> column : this.persistedKeyColumns.entrySet()) {
-            condition.append(column.getKey()).append(EQUALS).append(QUESTION_MARK);
+            condition.append(column.getKey()).append(CQL_EQUALS).append(QUESTION_MARK);
             if (i != size) {
                 condition.append(WHITESPACE).append(CQL_AND).append(WHITESPACE);
             }
@@ -750,13 +753,13 @@ public class CassandraEventTable extends AbstractRecordTable {
     private void updateOrAddToNoKeyTable(Map<String, Object> updateSetParameterMap) {
         List<Object> setValues = new ArrayList<>();
         String updateParameterString = this.buildUpdateParameterValues(updateSetParameterMap, setValues);
-        String condition = CQL_ID + EQUALS + QUESTION_MARK;
-        String updateQuery = this.cassandraStoreConfig.getRecordUpdateQuery().
+        String condition = CQL_ID + CQL_EQUALS + QUESTION_MARK;
+        String finalUpdateQuery = this.cassandraStoreConfig.getRecordUpdateQuery().
                 replace(PLACEHOLDER_KEYSPACE, this.keyspace).replace(PLACEHOLDER_TABLE, this.tableName).
                 replace(PLACEHOLDER_COLUMNS_AND_VALUES, updateParameterString).
                 replace(PLACEHOLDER_CONDITION, condition);
         setValues.add(CassandraTableUtils.generatePrimaryKeyValue());
-        PreparedStatement preparedStatement = this.session.prepare(updateQuery);
+        PreparedStatement preparedStatement = this.session.prepare(finalUpdateQuery);
         BoundStatement bound = preparedStatement.bind(setValues.toArray());
         this.session.execute(bound);
     }
@@ -781,9 +784,8 @@ public class CassandraEventTable extends AbstractRecordTable {
     private boolean containsAllPrimaryKeys(Map<String, Object> paramList) {
         // null checking
         List<String> paramKeys = new ArrayList<>(paramList.keySet());
-        if (this.persistedKeyColumns == null) {
-            return false;
-        } else if (paramKeys.size() != this.persistedKeyColumns.size()) {
+
+        if ((this.persistedKeyColumns == null) || (paramKeys.size() != this.persistedKeyColumns.size())) {
             return false;
         }
         for (Map.Entry<String, String> persistedColumn : this.persistedKeyColumns.entrySet()) {
@@ -911,14 +913,15 @@ public class CassandraEventTable extends AbstractRecordTable {
         List<TableMeta> tableColumns = new ArrayList<>();
 
         for (Row row : result) {
-            TableMeta tableMeta = new TableMeta(row.getString("column_name"),
-                    row.getString("kind"), row.getString("type"));
+            TableMeta tableMeta = new TableMeta(row.getString(TABLE_PROPERTY_COLUMN_NAME),
+                    row.getString(TABLE_PROPERTY_KIND),
+                    row.getString(TABLE_PROPERTY_TYPE));
             tableColumns.add(tableMeta);
         }
 
         this.persistedKeyColumns = new HashMap<>();
-        tableColumns.stream().filter(column -> column.getKeyType().equals("partition_key") ||
-                column.getKeyType().equals("clustering"))
+        tableColumns.stream().filter(column -> column.getKeyType().equals(TABLE_PROPERTY_PARTITION_KEY) ||
+                column.getKeyType().equals(TABLE_PROPERTY_CLUSTERING_KEY))
                 .forEach(column -> this.persistedKeyColumns.put(column.getColumnName(), column.getDataType()));
     }
 
@@ -938,7 +941,6 @@ public class CassandraEventTable extends AbstractRecordTable {
      * This will check whether defined column already exists in the table and the defined primary keys
      * are already as the previously defined ones
      */
-    // TODO: 1/23/18 check with this function
     private boolean isTableWithDefinedColumns() {
         String checkStatement = this.cassandraStoreConfig.getTableValidityQuery().replace(PLACEHOLDER_KEYSPACE,
                 this.keyspace.toLowerCase(Locale.ENGLISH)).
@@ -946,23 +948,41 @@ public class CassandraEventTable extends AbstractRecordTable {
         ResultSet result = this.session.execute(checkStatement);
         Map<String, String> tableDet = new HashMap<>();
         List<TableMeta> tableColumns = new ArrayList<>();
-        for (Row row : result) {
-            tableDet.put(row.getString("column_name"), row.getString("kind"));
-            TableMeta tableMeta = new TableMeta(row.getString("column_name"),
-                    row.getString("kind"), row.getString("type"));
+
+        result.forEach(row -> {
+            tableDet.put(row.getString(TABLE_PROPERTY_COLUMN_NAME), row.getString(TABLE_PROPERTY_KIND));
+            TableMeta tableMeta = new TableMeta(row.getString(TABLE_PROPERTY_COLUMN_NAME),
+                    row.getString(TABLE_PROPERTY_KIND), row.getString(TABLE_PROPERTY_TYPE));
             tableColumns.add(tableMeta);
-        }
+        });
 
         this.persistedKeyColumns = new HashMap<>();
+        Map<String, String> persistedColumns = initPersistedColumns(tableColumns);
+        return checkKeyAndDataTypeValidity(tableDet, persistedColumns);
+    }
+
+    /**
+     * This method will initialize the persisted keys of the actual table in the keyspace
+     * @param tableColumns columns in the table
+     * @return Map of persisted columns with their corresponding data type
+     */
+    private Map<String, String> initPersistedColumns(List<TableMeta> tableColumns) {
+        this.persistedKeyColumns = new HashMap<>();
         Map<String, String> persistedColumns = new HashMap<>();
-        for (TableMeta column : tableColumns) {
-            if (column.getKeyType().equals("partition_key") || column.getKeyType().equals("clustering")) {
+
+        tableColumns.forEach(column -> {
+            if (column.getKeyType().equals(TABLE_PROPERTY_PARTITION_KEY) || column.getKeyType().
+                    equals(TABLE_PROPERTY_CLUSTERING_KEY)) {
                 this.persistedKeyColumns.put(column.getColumnName(), column.getDataType());
             }
             persistedColumns.put(column.getColumnName(), column.getDataType());
-        }
+        });
+        return persistedColumns;
+    }
 
-        boolean validKeys = false, validColumns, validDataTypes;
+    private boolean checkKeyAndDataTypeValidity(Map<String, String> tableDet, Map<String, String> persistedColumns) {
+        boolean validColumns;
+        boolean validDataTypes;
         // To Check whether the column names match with the persisted column names
         for (Attribute attribute : this.schema) {
             validColumns = tableDet.containsKey(attribute.getName().toLowerCase(Locale.ENGLISH));
@@ -970,7 +990,6 @@ public class CassandraEventTable extends AbstractRecordTable {
                 return false;
             }
         }
-
         // To Check whether the column data types match with the persisted column data types names
         for (Attribute attribute : this.schema) {
             String persistedColumnType = persistedColumns.get(attribute.getName().toLowerCase(Locale.ENGLISH));
@@ -980,7 +999,11 @@ public class CassandraEventTable extends AbstractRecordTable {
                 return false;
             }
         }
+        return this.isValidKeys(tableDet);
+    }
 
+    private boolean isValidKeys(Map<String, String> tableDet) {
+        boolean validKeys = false;
         if (this.noKeys) {
             validKeys = tableDet.containsKey("_id");
             this.noKeyTable = validKeys;
@@ -988,7 +1011,8 @@ public class CassandraEventTable extends AbstractRecordTable {
             for (Attribute attribute : this.primaryKeys) {
                 String pk = attribute.getName().toLowerCase(Locale.ENGLISH);
                 validKeys = (tableDet.containsKey(pk) &&
-                        (tableDet.get(pk).equals("partition_key") || tableDet.get(pk).equals("clustering")));
+                        (tableDet.get(pk).equals(TABLE_PROPERTY_PARTITION_KEY) || tableDet.get(pk).
+                                equals(TABLE_PROPERTY_CLUSTERING_KEY)));
                 if (!validKeys) {
                     return false;
                 }
@@ -1001,18 +1025,8 @@ public class CassandraEventTable extends AbstractRecordTable {
      * This check the indexAnnotation and create indexes on the given columns
      */
     private void initIndexQuery() {
-        String indexes[] = this.indexAnnotation.getElements().get(0).getValue().split(SEPARATOR);
-        /*for (String index : indexes) {
-            for (Attribute attribute : this.schema) {
-                if (attribute.getName().trim().equals(index)) {
-                    String indexQuery = this.cassandraStoreConfig.getIndexQuery().
-                            replace(PLACEHOLDER_KEYSPACE, this.keyspace).replace(PLACEHOLDER_TABLE, this.tableName).
-                            replace(PLACEHOLDER_INDEX, index);
-                    this.session.execute(indexQuery);
-                }
-            }
-        }*/
-        Arrays.stream(indexes).forEach(index -> {
+        String[] indexes = this.indexAnnotation.getElements().get(0).getValue().split(SEPARATOR);
+        Arrays.stream(indexes).forEach(index ->
             this.schema.stream()
                     .filter(attribute -> attribute.getName().trim().equals(index))
                     .forEach(attribute -> {
@@ -1020,8 +1034,7 @@ public class CassandraEventTable extends AbstractRecordTable {
                                 replace(PLACEHOLDER_KEYSPACE, this.keyspace).replace(PLACEHOLDER_TABLE, this.tableName).
                                 replace(PLACEHOLDER_INDEX, index);
                         this.session.execute(indexQuery);
-                    });
-        });
-
+                    })
+        );
     }
 }

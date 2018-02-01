@@ -29,9 +29,9 @@ public class CassandraTableTestUtils {
     public static final String HOST = "localhost";
     public static final String KEY_SPACE = "AnalyticsFamily";
     private static final Log LOG = LogFactory.getLog(CassandraTableTestUtils.class);
-    public static final String PASSWORD = "cassandra";
+    public static final String PASSWORD = "";
     public static final String TABLE_NAME = "CassandraTestTable";
-    public static final String USER_NAME = "cassandra";
+    public static final String USER_NAME = "";
     private static Session session;
 
     public static void initializeTable() {
@@ -47,20 +47,18 @@ public class CassandraTableTestUtils {
 
     private static synchronized void dropTable() throws InvalidQueryException {
         createConn();
-        String deleteQuery = "DROP TABLE " + KEY_SPACE + "." + TABLE_NAME;
-        try {
-            session.execute(deleteQuery);
-            LOG.info("Table dropped ...");
-        } catch (InvalidQueryException ex) {
-            LOG.info("No configured table with the given table name");
-        }
+        String deleteQuery = "DROP TABLE IF EXISTS " + KEY_SPACE + "." + TABLE_NAME;
+        session.execute(deleteQuery);
+        session.close();
     }
 
     public static long getRowsInTable() {
         createConn();
         String deleteQuery = "SELECT count(*) FROM " + KEY_SPACE + "." + TABLE_NAME;
         ResultSet rs = session.execute(deleteQuery);
-        return rs.one().getLong("count");
+        long count = rs.one().getLong("count");
+        session.close();
+        return count;
     }
 
 }

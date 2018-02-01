@@ -416,7 +416,6 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
     @Test(dependsOnMethods = "updateOrInsertTableTest4")
     public void updateOrInsertTableTest5() throws InterruptedException, SQLException {
         log.info("updateOrInsertTableTest5");
-
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
@@ -584,8 +583,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
 
     @Test(dependsOnMethods = "updateOrInsertTableTest6")
     public void updateOrInsertTableTest7() throws InterruptedException, SQLException {
-        log.info("updateOrInsertTableTest6");
-
+        log.info("updateOrInsertTableTest7");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +

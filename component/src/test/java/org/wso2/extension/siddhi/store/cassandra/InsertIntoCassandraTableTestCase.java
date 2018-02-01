@@ -64,7 +64,7 @@ public class InsertIntoCassandraTableTestCase {
         CassandraTableTestUtils.initializeTable();
     }
 
-    @Test(testName = "cassandratableinsertiontest1", description = "Testing table creation.")
+    @Test(description = "Testing table creation.")
     public void cassandrainsertiontest1() throws InterruptedException {
         //Configure siddhi to insert events data to the HBase table only from specific fields of the stream.
         log.info("casandrainsertiontest1");
@@ -143,7 +143,7 @@ public class InsertIntoCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(testName = "cassandratableinsertiontest2", description = "Testing table creation.")
+    @Test(description = "Testing table creation.", dependsOnMethods = "cassandrainsertiontest1")
     public void cassandratableinsertiontest2() throws InterruptedException {
         //Testing table creation and insetion with an object
         log.info("casandrainsertiontest2");
@@ -223,7 +223,7 @@ public class InsertIntoCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(testName = "cassandratableinsertiontest3", description = "Testing table creation.")
+    @Test(description = "Testing table creation.", dependsOnMethods = "cassandratableinsertiontest2")
     public void cassandratableinsertiontest3() throws InterruptedException {
         //Testing table creation with a compound primary key field
         log.info("casandrainsertiontest3");

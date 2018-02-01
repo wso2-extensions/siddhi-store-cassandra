@@ -30,6 +30,7 @@ import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.query.output.callback.QueryCallback;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.util.EventPrinter;
+//import org.wso2.siddhi.core.util.SiddhiTestHelper;
 
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.HOST;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.KEY_SPACE;
@@ -121,6 +122,7 @@ public class ContainsInCassandraTableTestCase {
         checkStockStream.send(new Object[]{"IBM", 100L});
         checkStockStream.send(new Object[]{"WSO2", 100L});
         Thread.sleep(1000);
+        //SiddhiTestHelper.waitForEvents(200L, inEventCount, inEventCount, 60000L);
 
         Assert.assertEquals(inEventCount, 2, "Number of success events");
         Assert.assertEquals(eventArrived, true, "Event arrived");

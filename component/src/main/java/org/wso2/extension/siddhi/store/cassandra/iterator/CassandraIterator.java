@@ -41,9 +41,9 @@ public class CassandraIterator implements RecordIterator<Object[]> {
     private Iterator<Row> cassandraIterator;
     private List<Attribute> attributes;
 
-    public CassandraIterator(Iterator<Row> iterator, List<Attribute> attributes) {
+    public CassandraIterator(Iterator<Row> cassandraIterator, List<Attribute> attributes) {
 
-        this.cassandraIterator = iterator;
+        this.cassandraIterator = cassandraIterator;
         this.attributes = attributes;
     }
 
@@ -131,7 +131,6 @@ public class CassandraIterator implements RecordIterator<Object[]> {
         return result.toArray();
     }
 
-    // TODO: 1/23/18 check whether this is needed
     private Object objectDataReadResolver(Row row, String attributeName) throws IOException, ClassNotFoundException {
         ByteBuffer data = row.getBytes(attributeName);
         ByteArrayInputStream bis = new ByteArrayInputStream(data.array());

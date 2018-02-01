@@ -31,6 +31,7 @@ public class CassandraEventTableConstants {
     public static final String ANNOTATION_PASSWORD = "password";
 
     //Miscellaneous CQL constants
+    public static final String CQL_EQUALS = "=";
     public static final String CQL_FILTERING = "ALLOW FILTERING";
     public static final String CQL_LESS_THAN = "<";
     public static final String CQL_GREATER_THAN = ">";
@@ -45,10 +46,11 @@ public class CassandraEventTableConstants {
     public static final String CQL_WHERE = "WHERE";
     public static final String WHITESPACE = " ";
     public static final String SEPARATOR = ",";
-    public static final String EQUALS = "=";
     public static final String QUESTION_MARK = "?";
     public static final String OPEN_PARENTHESIS = "(";
+    public static final String OPEN_SQUARE_BRACKET = "[";
     public static final String CLOSE_PARENTHESIS = ")";
+    public static final String CLOSE_SQUARE_BRACKET = "]";
     public static final String CONFIG_FILE = "cassandra-table-config.xml";
 
     public static final String PLACEHOLDER_COLUMNS = "{{COLUMNS}}";
@@ -62,5 +64,9 @@ public class CassandraEventTableConstants {
     public static final String PLACEHOLDER_TABLE = "{{TABLE}}";
     public static final String PLACEHOLDER_SELECT_VALUES = "{{SELECT_VALUES}}";
 
-
+    public static final String TABLE_PROPERTY_CLUSTERING_KEY = "clustering";
+    public static final String TABLE_PROPERTY_COLUMN_NAME = "column_name";
+    public static final String TABLE_PROPERTY_KIND = "kind";
+    public static final String TABLE_PROPERTY_PARTITION_KEY = "partition_key";
+    public static final String TABLE_PROPERTY_TYPE = "type";
 }
