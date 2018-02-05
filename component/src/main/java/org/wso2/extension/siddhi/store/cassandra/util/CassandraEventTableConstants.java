@@ -22,8 +22,12 @@ package org.wso2.extension.siddhi.store.cassandra.util;
  */
 public class CassandraEventTableConstants {
 
+    private CassandraEventTableConstants(){
+        //prevents the object initialization
+    }
+
     //Constants that are needed to initiate cassandra connection
-    public static final String ANNOTATION_ELEMENT_TABLE_NAME = "table.name";
+    public static final String ANNOTATION_ELEMENT_TABLE_NAME = "column.family";
     public static final String ANNOTATION_ELEMENT_KEY_SPACE = "keyspace";
     public static final String ANNOTATION_HOST = "cassandra.host";
     public static final String DEFAULT_KEY_SPACE = "wso2sp";

@@ -65,7 +65,7 @@ public class CassandraTableUtils {
                 .filter(key -> key.trim().equals(attribute.getName().trim()))
                 .forEach(key -> primaryKeyList.add(attribute)));
         if (primaryKeyList.isEmpty()) {
-            throw new CassandraTableException("Please enter a primary within the defined table columns");
+            throw new CassandraTableException("Please enter a primary key within the defined table columns");
         }
         return primaryKeyList;
     }
@@ -75,7 +75,7 @@ public class CassandraTableUtils {
      * @param siddhiDataType siddhi data type of the attribute
      * @return returns the relevent String to he relevent cassandra data type
      */
-    public static String dataConversionToCassandra(Attribute.Type siddhiDataType) {
+    public static String convertToCassandraDataTypes(Attribute.Type siddhiDataType) {
         String cassandraDataType;
         switch (siddhiDataType) {
             case STRING:
@@ -125,8 +125,7 @@ public class CassandraTableUtils {
      * @throws JAXBException exception throw when the file cannot be found
      * @throws CannotLoadConfigurationException exception throw when the configuration cannot be loaded
      */
-    public CassandraStoreConfig readConfigFile(ConfigReader configReader) throws JAXBException,
-            CannotLoadConfigurationException {
+    public CassandraStoreConfig readConfigFile(ConfigReader configReader) throws CannotLoadConfigurationException {
         InputStream inputStream = null;
         CassandraStoreConfig cassandraStoreConfig = new CassandraStoreConfig();
         try {

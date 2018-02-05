@@ -78,7 +78,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -138,7 +138,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -205,7 +205,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol1 string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -270,7 +270,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -335,7 +335,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -400,7 +400,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -465,7 +465,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -532,7 +532,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float); " +
                 "define stream CheckStockStream (symbol string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -602,7 +602,7 @@ public class JoinCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +

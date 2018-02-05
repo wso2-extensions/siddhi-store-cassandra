@@ -69,7 +69,7 @@ public class ReadFromCassandraTableTestCase {
         String streams = "" +
                 "define stream FooStream (name string, category string, volume long);\n" +
                 "define stream StockStream (itemId string, type string, volume long);\n" +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -142,7 +142,7 @@ public class ReadFromCassandraTableTestCase {
                 "define stream FooStream (name string, category string, volume long);" +
                 "define stream StockStream (itemId string, type string, volume long);\n" +
                 "define stream OutputStream (checkName string, checkCategory string, checkVolume long);\n" +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -183,7 +183,7 @@ public class ReadFromCassandraTableTestCase {
                 "define stream FooStream (name string, category string, volume long);\n" +
                 "define stream StockStream (itemId string, type string, volume long);\n" +
                 "define stream OutputStream (checkName string, checkCategory string, checkVolume long);\n" +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -271,7 +271,7 @@ public class ReadFromCassandraTableTestCase {
                 "define stream FooStream (name string, category string, volume long);\n" +
                 "define stream StockStream (itemId string, type string, volume long);\n" +
                 "define stream OutputStream (checkName string, checkCategory string, checkVolume long);\n" +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -352,7 +352,7 @@ public class ReadFromCassandraTableTestCase {
                 "define stream FooStream (name string, category string, volume long);\n" +
                 "define stream StockStream (name string, type string, volume long);\n" +
                 "define stream OutputStream (checkName string, checkCategory string, checkVolume double);\n" +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +

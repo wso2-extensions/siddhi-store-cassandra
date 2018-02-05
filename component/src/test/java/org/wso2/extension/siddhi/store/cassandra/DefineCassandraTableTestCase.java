@@ -72,7 +72,7 @@ public class DefineCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -152,7 +152,7 @@ public class DefineCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -232,7 +232,7 @@ public class DefineCassandraTableTestCase {
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -261,7 +261,7 @@ public class DefineCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -494,7 +494,7 @@ public class DefineCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -566,7 +566,7 @@ public class DefineCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +

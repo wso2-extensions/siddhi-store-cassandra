@@ -70,7 +70,7 @@ public class UpdateCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -143,7 +143,7 @@ public class UpdateCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(dependsOnMethods = "updateFromTableTest1")
+    @Test(/*dependsOnMethods = "updateFromTableTest1"*/)
     public void updateFromTableTest2() throws InterruptedException {
         //Check for update event data in HBase table when multiple key conditions are true.
         log.info("updateFromTableTest2");
@@ -152,7 +152,7 @@ public class UpdateCassandraTableTestCase {
                 "define stream StockStream (symbol string, price double, volume long); " +
                 "define stream UpdateStockStream (symbol string, price double, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -235,7 +235,7 @@ public class UpdateCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -313,7 +313,7 @@ public class UpdateCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -398,7 +398,7 @@ public class UpdateCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -479,7 +479,7 @@ public class UpdateCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -562,7 +562,7 @@ public class UpdateCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +

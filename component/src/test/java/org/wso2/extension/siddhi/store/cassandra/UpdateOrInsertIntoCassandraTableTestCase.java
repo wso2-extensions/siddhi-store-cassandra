@@ -72,7 +72,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -155,7 +155,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -239,7 +239,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -342,7 +342,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -421,7 +421,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -503,7 +503,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -589,7 +589,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -675,7 +675,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -755,7 +755,7 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +

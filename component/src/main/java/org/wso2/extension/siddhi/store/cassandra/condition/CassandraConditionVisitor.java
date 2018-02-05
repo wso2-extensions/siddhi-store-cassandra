@@ -45,7 +45,6 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
 
     private Map<String, Object> placeholders;
     private SortedMap<Integer, Object> parameters;
-
     private int streamVarCount;
     private int constantCount;
     private boolean streamVarVisited;
@@ -53,7 +52,7 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
     private boolean storeVarVisited;
     private Operand.StreamVariable streamVariable;
     private Constant constant;
-    private String cqlOpStr;
+    private String cqlOperatorString;
     private boolean readOnlyCondition;
 
     public CassandraConditionVisitor() {
@@ -79,6 +78,7 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
 
     /**
      * This method returns a sorted map which is needed to map with the siddhi parameters.
+     * @return Sorted map is returned with the relevent parameters.
      */
     public SortedMap<Integer, Object> getParameters() {
         return this.parameters;
@@ -116,12 +116,12 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void beginVisitOr() {
-        condition.append(CassandraEventTableConstants.OPEN_PARENTHESIS);
+        throw new OperationNotSupportedException("OR operator is not supported in cassandra");
     }
 
     @Override
     public void endVisitOr() {
-        condition.append(CassandraEventTableConstants.CLOSE_PARENTHESIS);
+        throw new OperationNotSupportedException("OR operator is not supported in cassandra");
     }
 
     @Override
@@ -181,7 +181,7 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
     @Override
     public void beginVisitCompareRightOperand(Compare.Operator operator) {
         if (streamVarVisited || constantVisited) {
-            this.cqlOpStr = getCorrespondingCqlOperatorString(operator);
+            this.cqlOperatorString = getCorrespondingCqlOperatorString(operator);
         } else {
             condition.append(getCorrespondingCqlOperatorString(operator));
             condition.append(CassandraEventTableConstants.WHITESPACE);
@@ -190,6 +190,7 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
 
     /**
      * This method returns the converted operator corresponding to cassandra.
+     * @param operator operator that need to perform the function.
      */
     private String getCorrespondingCqlOperatorString(Compare.Operator operator) {
         String cqlOPStr = "";
@@ -366,10 +367,10 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
         condition.append(attributeName).
                 append(CassandraEventTableConstants.WHITESPACE);
         if (streamVarVisited) {
-            condition.append(cqlOpStr).append(CassandraEventTableConstants.WHITESPACE);
+            condition.append(cqlOperatorString).append(CassandraEventTableConstants.WHITESPACE);
             processStreamVariable();
         } else if (constantVisited) {
-            condition.append(cqlOpStr).append(CassandraEventTableConstants.WHITESPACE);
+            condition.append(cqlOperatorString).append(CassandraEventTableConstants.WHITESPACE);
             processConstant();
         }
         storeVarVisited = true;
@@ -396,6 +397,7 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
                 String candidate = token.substring(0, token.indexOf(CLOSE_SQUARE_BRACKET));
                 if (this.placeholders.containsKey(candidate)) {
                     this.parameters.put(ordinal, this.placeholders.get(candidate));
+
                     ordinal++;
                 }
             }

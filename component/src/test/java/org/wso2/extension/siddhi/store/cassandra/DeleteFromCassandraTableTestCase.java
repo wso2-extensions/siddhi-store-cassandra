@@ -60,7 +60,7 @@ public class DeleteFromCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream DeleteStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -103,7 +103,7 @@ public class DeleteFromCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream DeleteStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -146,7 +146,7 @@ public class DeleteFromCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream DeleteStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -187,7 +187,7 @@ public class DeleteFromCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream DeleteStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -229,7 +229,7 @@ public class DeleteFromCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream DeleteStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -270,7 +270,7 @@ public class DeleteFromCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol_q string, price float, volume long); " +
                 "define stream DeleteStockStream (symbol_q string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -314,7 +314,7 @@ public class DeleteFromCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, volume long); " +
                 "define stream DeleteStockStream (symbol string, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -357,7 +357,7 @@ public class DeleteFromCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream DeleteStockStream (symbol string, price float, volume long); " +
                 "define stream DeleteStockStream (symbol string, price float, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +

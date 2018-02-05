@@ -21,8 +21,11 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.exceptions.InvalidQueryException;
+import com.datastax.driver.core.exceptions.NoHostAvailableException;
+import com.datastax.driver.core.exceptions.OperationTimedOutException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.extension.siddhi.store.cassandra.exception.CassandraTableException;
 
 public class CassandraTableTestUtils {
 
@@ -45,11 +48,50 @@ public class CassandraTableTestUtils {
         session = cluster.connect(KEY_SPACE);
     }
 
-    private static synchronized void dropTable() throws InvalidQueryException {
+    private static void dropTable() throws InvalidQueryException {
         createConn();
+        boolean isFailed = true;
+        for (int i = 0; (i < 10) && isFailed; i++) {
+            isFailed = dropTableRetry();
+        }
+    }
+
+    /*private static void dropTableRetry(int retryIndex, boolean isExecuted) throws InvalidQueryException {
         String deleteQuery = "DROP TABLE IF EXISTS " + KEY_SPACE + "." + TABLE_NAME;
-        session.execute(deleteQuery);
-        session.close();
+        while (!isExecuted && retryIndex < 10) {
+            try {
+                session.execute(deleteQuery);
+                isExecuted = true;
+            } catch (OperationTimedOutException | NoHostAvailableException ex) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new CassandraTableException("Problem in table detetion..");
+                }
+                LOG.info("Retried : " + retryIndex + " " + isExecuted);
+                dropTableRetry(++retryIndex, false);
+            }
+        }
+        if (session != null) {
+            session.close();
+        }
+    }*/
+
+    private static boolean dropTableRetry() throws InvalidQueryException {
+        String deleteQuery = "DROP TABLE IF EXISTS " + KEY_SPACE + "." + TABLE_NAME;
+        try {
+            session.execute(deleteQuery);
+            return false;
+        } catch (OperationTimedOutException | NoHostAvailableException ex) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new CassandraTableException("Problem in table detetion..");
+            }
+            LOG.info("Retried : ");
+            return true;
+        }
+
     }
 
     public static long getRowsInTable() {

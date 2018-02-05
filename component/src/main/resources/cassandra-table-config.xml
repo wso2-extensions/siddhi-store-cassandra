@@ -24,8 +24,7 @@
     <recordExistQuery>SELECT * FROM {{KEYSPACE}}.{{TABLE}} WHERE {{CONDITION}} ALLOW FILTERING</recordExistQuery>
     <recordDeleteQuery>DELETE FROM {{KEYSPACE}}.{{TABLE}} WHERE {{CONDITION}}</recordDeleteQuery>
     <recordInsertQuery>INSERT INTO {{KEYSPACE}}.{{TABLE}} ({{INSERT_VALUES}}) VALUES ({{QUESTION_MARKS}}) IF NOT EXISTS</recordInsertQuery>
-    <recordSelectQuery>SELECT {{SELECT_VALUES}} FROM {{KEYSPACE}}.{{TABLE}} WHERE {{CONDITION}} ALLOW FILTERING
-    </recordSelectQuery>
+    <recordSelectQuery>SELECT {{SELECT_VALUES}} FROM {{KEYSPACE}}.{{TABLE}} WHERE {{CONDITION}} ALLOW FILTERING</recordSelectQuery>
     <recordSelectNoKeyTable>SELECT "_id" FROM {{KEYSPACE}}.{{TABLE}} WHERE {{CONDITION}} ALLOW FILTERING</recordSelectNoKeyTable>
     <recordUpdateQuery>UPDATE {{KEYSPACE}}.{{TABLE}} SET {{COLUMNS_AND_VALUES}} WHERE {{CONDITION}}</recordUpdateQuery>
 </cassandraStoreConfig>

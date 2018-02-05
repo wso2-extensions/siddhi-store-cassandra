@@ -131,6 +131,14 @@ public class CassandraIterator implements RecordIterator<Object[]> {
         return result.toArray();
     }
 
+    /**
+     *
+     * @param row the {@link Row} from which the values should be retrieved.
+     * @param attributeName name of the attribute
+     * @return Object consists of object data
+     * @throws IOException throws this exception is the in closing the input stream
+     * @throws ClassNotFoundException throws this exception if the object cannot be read
+     */
     private Object objectDataReadResolver(Row row, String attributeName) throws IOException, ClassNotFoundException {
         ByteBuffer data = row.getBytes(attributeName);
         ByteArrayInputStream bis = new ByteArrayInputStream(data.array());

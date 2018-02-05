@@ -19,6 +19,7 @@ package org.wso2.extension.siddhi.store.cassandra.condition;
 
 import org.wso2.siddhi.core.util.collection.operator.CompiledCondition;
 
+
 import java.util.SortedMap;
 
 /**
@@ -43,17 +44,36 @@ public class CassandraCompiledCondition implements CompiledCondition {
         return new CassandraCompiledCondition(this.compiledQuery, this.parameters, this.readOnlyCondition);
     }
 
+    /**
+     * This method is used to obtain the compiled query
+     * @return returns the compiled query
+     */
     public String getCompiledQuery() {
         return compiledQuery;
     }
 
+    /**
+     * This is used to obtain the String value of the compiled query
+     * @return the String value of the compiled query
+     */
     public String toString() {
         return getCompiledQuery();
     }
 
+    /**
+     * This is used to obtain the sorted map of parameter values according to the value
+     * @return returns a map of parameters
+     */
     public SortedMap<Integer, Object> getParameters() {
         return parameters;
     }
+
+    /**
+     * This method is to get whether this is a readonly condition.
+     * Readonly condition means that the Siddhi condition should contain only == (Equal operator) in the
+     * condition statement
+     * @return returns whether this is a readonly condition.
+     */
     public boolean getReadOnlyCondition() {
         return readOnlyCondition;
     }

@@ -33,10 +33,18 @@ public class Constant {
         this.type = type;
     }
 
+    /**
+     * To obtain the value of the constant
+     * @return value of the constant
+     */
     public Object getValue() {
         return value;
     }
 
+    /**
+     * To obtain the type of the constant
+     * @return type of the constant
+     */
     public Attribute.Type getType() {
         return type;
     }

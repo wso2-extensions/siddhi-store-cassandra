@@ -8,7 +8,7 @@
 
 <span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span>
 ```
-@Store(type="cassandra", cassandra.host="<STRING>", table.name="<STRING>", keyspace="<STRING>", username="<STRING>", password="<STRING>")
+@Store(type="cassandra", cassandra.host="<STRING>", column.family="<STRING>", keyspace="<STRING>", username="<STRING>", password="<STRING>")
 @PrimaryKey("PRIMARY_KEY")
 @Index("INDEX")
 ```
@@ -32,7 +32,7 @@
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
-        <td style="vertical-align: top">table.name</td>
+        <td style="vertical-align: top">column.family</td>
         <td style="vertical-align: top; word-wrap: break-word">The name with which the event table should be persisted in the store. If no name is specified via this parameter, the event table is persisted with the same name as the Siddhi table.</td>
         <td style="vertical-align: top">The table name defined in the Siddhi Application query.</td>
         <td style="vertical-align: top">STRING</td>
@@ -42,7 +42,7 @@
     <tr>
         <td style="vertical-align: top">keyspace</td>
         <td style="vertical-align: top; word-wrap: break-word">User need to give the keyspace that the data is persisted. It is ven by the keyspace parameter</td>
-        <td style="vertical-align: top">'stockTable'</td>
+        <td style="vertical-align: top">'cassandraTestTable'</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
         <td style="vertical-align: top">No</td>
@@ -50,7 +50,7 @@
     <tr>
         <td style="vertical-align: top">username</td>
         <td style="vertical-align: top; word-wrap: break-word">Through user name user can specify the relevent username that is used to log in to the cassandra keyspace .</td>
-        <td style="vertical-align: top">''</td>
+        <td style="vertical-align: top">null</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
@@ -58,7 +58,7 @@
     <tr>
         <td style="vertical-align: top">password</td>
         <td style="vertical-align: top; word-wrap: break-word">Through password user can specify the relevent password that is used to log in to the cassandra keyspace .</td>
-        <td style="vertical-align: top">''</td>
+        <td style="vertical-align: top">null</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>

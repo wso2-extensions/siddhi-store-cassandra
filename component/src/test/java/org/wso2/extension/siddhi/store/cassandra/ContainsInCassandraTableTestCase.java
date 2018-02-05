@@ -54,12 +54,12 @@ public class ContainsInCassandraTableTestCase {
 
     @BeforeClass
     public static void startTest() {
-        log.info("== Contains in Table UPDATE tests started ==");
+        log.info("== Contains in Table tests started ==");
     }
 
     @AfterClass
     public static void shutdown() {
-        log.info("== Contains in Table UPDATE tests completed ==");
+        log.info("== Contains in Table tests completed ==");
     }
 
     @Test
@@ -69,7 +69,7 @@ public class ContainsInCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -138,7 +138,7 @@ public class ContainsInCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
@@ -213,7 +213,7 @@ public class ContainsInCassandraTableTestCase {
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, volume long); " +
-                "@Store(type=\"cassandra\", table.name=\"" + TABLE_NAME + "\", " +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
                 "keyspace=\"" + KEY_SPACE + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
