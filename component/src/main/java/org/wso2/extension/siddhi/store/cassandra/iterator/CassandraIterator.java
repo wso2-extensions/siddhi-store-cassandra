@@ -18,15 +18,10 @@
 package org.wso2.extension.siddhi.store.cassandra.iterator;
 
 import com.datastax.driver.core.Row;
-import org.wso2.extension.siddhi.store.cassandra.exception.CassandraTableException;
 import org.wso2.siddhi.core.table.record.RecordIterator;
 import org.wso2.siddhi.query.api.definition.Attribute;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
