@@ -54,6 +54,7 @@ public class CassandraTableTestUtils {
         for (int i = 0; (i < 10) && isFailed; i++) {
             isFailed = dropTableRetry();
         }
+        session.close();
     }
 
     /*private static void dropTableRetry(int retryIndex, boolean isExecuted) throws InvalidQueryException {
@@ -91,7 +92,6 @@ public class CassandraTableTestUtils {
             LOG.info("Retried : ");
             return true;
         }
-
     }
 
     public static long getRowsInTable() {

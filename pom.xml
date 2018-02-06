@@ -29,21 +29,12 @@
     <artifactId>siddhi-store-cassandra-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>WSO2 Siddhi Store Extension - Cassandra Aggregator Pom</name>
+    <name>WSO2 Siddhi Store Extension - Cassandra Parent Pom</name>
     <url>http://wso2.org</url>
 
-    <profiles>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>component</module>
-                <!--<module>coverage-reports</module>-->
-            </modules>
-        </profile>
-    </profiles>
+    <modules>
+        <module>component</module>
+    </modules>
 
     <properties>
         <siddhi.version>4.0.6</siddhi.version>
@@ -51,9 +42,15 @@
         <testng.version>6.9.10</testng.version>
         <commons.logging.version>1.1.1</commons.logging.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <io.fabric8.version>0.20.0</io.fabric8.version>
         <jacoco.maven.version>0.7.9</jacoco.maven.version>
+        <cassandra.diver.version>3.3.2</cassandra.diver.version>
+        <guava.import.version>[19.0, 23.6)</guava.import.version>
+        <codehale.import.version>[3.0, 4.0)</codehale.import.version>
+        <jboss.import.version>[3.9, 4.0)</jboss.import.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <scm>
@@ -115,6 +112,11 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons.lang3.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>cassandra-driver-core</artifactId>
+                <version>${cassandra.diver.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -58,11 +58,9 @@
             <artifactId>commons-lang3</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.datastax.cassandra/cassandra-driver-core -->
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-core</artifactId>
-            <version>${cassandra.diver.version}</version>
         </dependency>
     </dependencies>
 
@@ -81,9 +79,11 @@
                             org.wso2.extension.siddhi.store.cassandra.*
                         </Export-Package>
                         <Import-Package>
-                            *;resolution:=optional
+                            com.datastax.driver.core.*,version="${cassandra.diver.version}",
+                            com.google.common.*;version="${guava.import.version}",
+                            com.codahale.metrics.*;version="${codehale.import.version}",
+                            org.jboss.netty.*;version="${jboss.import.version}"
                         </Import-Package>
-                        <DynamicImport-Package>*</DynamicImport-Package>
                         <Include-Resource>
                             META-INF=target/classes/META-INF,
                             {maven-resources}
@@ -132,11 +132,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <cassandra.diver.version>3.3.2</cassandra.diver.version>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
 </project>

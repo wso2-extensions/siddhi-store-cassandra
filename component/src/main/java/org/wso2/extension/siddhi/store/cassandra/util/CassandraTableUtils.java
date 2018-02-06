@@ -162,8 +162,7 @@ public class CassandraTableUtils {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    throw new CassandraTableException("Failed to close the input stream for" +
-                            CONFIG_FILE, e);
+                    throw new CassandraTableException("Failed to close the input stream for" + CONFIG_FILE, e);
                 }
             }
         }

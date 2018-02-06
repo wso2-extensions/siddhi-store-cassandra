@@ -38,12 +38,12 @@ import java.util.List;
  */
 public class CassandraIterator implements RecordIterator<Object[]> {
 
-    private Iterator<Row> cassandraIterator;
+    private Iterator<Row> iterator;
     private List<Attribute> attributes;
 
-    public CassandraIterator(Iterator<Row> cassandraIterator, List<Attribute> attributes) {
+    public CassandraIterator(Iterator<Row> iterator, List<Attribute> attributes) {
 
-        this.cassandraIterator = cassandraIterator;
+        this.iterator = iterator;
         this.attributes = attributes;
     }
 
@@ -62,6 +62,7 @@ public class CassandraIterator implements RecordIterator<Object[]> {
      */
     @Override
     public void close() throws IOException {
+        // Not supported in cassandra
     }
 
     /**
@@ -73,7 +74,7 @@ public class CassandraIterator implements RecordIterator<Object[]> {
      */
     @Override
     public boolean hasNext() {
-        return this.cassandraIterator.hasNext();
+        return this.iterator.hasNext();
     }
 
     /**
@@ -83,7 +84,7 @@ public class CassandraIterator implements RecordIterator<Object[]> {
      */
     @Override
     public Object[] next() {
-        Row row = cassandraIterator.next();
+        Row row = iterator.next();
         return extractRecord(row);
     }
 
@@ -109,11 +110,7 @@ public class CassandraIterator implements RecordIterator<Object[]> {
                     result.add(row.getFloat(attribute.getName()));
                     break;
                 case INT:
-                    try {
-                        result.add(objectDataReadResolver(row, attribute.getName()));
-                    } catch (IOException | ClassNotFoundException ex) {
-                        throw new CassandraTableException("Something went wrong when retrieving an object", ex);
-                    }
+                    result.add(row.getInt(attribute.getName()));
                     break;
                 case LONG:
                     result.add(row.getLong(attribute.getName()));
@@ -131,14 +128,15 @@ public class CassandraIterator implements RecordIterator<Object[]> {
         return result.toArray();
     }
 
-    /**
+    /*
+    *//**
      *
      * @param row the {@link Row} from which the values should be retrieved.
      * @param attributeName name of the attribute
      * @return Object consists of object data
      * @throws IOException throws this exception is the in closing the input stream
      * @throws ClassNotFoundException throws this exception if the object cannot be read
-     */
+     *//*
     private Object objectDataReadResolver(Row row, String attributeName) throws IOException, ClassNotFoundException {
         ByteBuffer data = row.getBytes(attributeName);
         ByteArrayInputStream bis = new ByteArrayInputStream(data.array());
@@ -146,5 +144,5 @@ public class CassandraIterator implements RecordIterator<Object[]> {
         Object object = in.readObject();
         in.close();
         return object;
-    }
+    }*/
 }
