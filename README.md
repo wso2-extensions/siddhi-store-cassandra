@@ -46,6 +46,8 @@ Find some useful links below:
 
 ## Features
 
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.0.0-SNAPSHOT/#cassansra-store">cassandra</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#stores">Store</a>)*<br><div style="padding-left: 1em;"><p>This extension assigns data sources and connection instructions to event tables. It also implements read write operations on connected datasources</p></div>
+
 ## How to Contribute
  
   * Please report issues at <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/issues">GitHub Issue Tracker</a>.
