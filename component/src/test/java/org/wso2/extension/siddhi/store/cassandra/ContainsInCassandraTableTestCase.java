@@ -30,13 +30,14 @@ import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.query.output.callback.QueryCallback;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.util.EventPrinter;
-//import org.wso2.siddhi.core.util.SiddhiTestHelper;
 
-import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.HOST;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.KEY_SPACE;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.PASSWORD;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.TABLE_NAME;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.USER_NAME;
+import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getHostIp;
+import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getPort;
+
 
 public class ContainsInCassandraTableTestCase {
     private static final Logger log = Logger.getLogger(ContainsInCassandraTableTestCase.class);
@@ -63,17 +64,17 @@ public class ContainsInCassandraTableTestCase {
     }
 
     @Test
-    public void containsCassanraTableTest1() throws InterruptedException {
-        log.info("containsCassanraTableTest1");
+    public void containsCassandraTableTest1() throws InterruptedException {
+        log.info("containsCassandraTableTest1");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
@@ -122,7 +123,6 @@ public class ContainsInCassandraTableTestCase {
         checkStockStream.send(new Object[]{"IBM", 100L});
         checkStockStream.send(new Object[]{"WSO2", 100L});
         Thread.sleep(1000);
-        //SiddhiTestHelper.waitForEvents(200L, inEventCount, inEventCount, 60000L);
 
         Assert.assertEquals(inEventCount, 2, "Number of success events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
@@ -131,7 +131,7 @@ public class ContainsInCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(dependsOnMethods = "containsCassanraTableTest1")
+    @Test(dependsOnMethods = "containsCassandraTableTest1")
     public void containsCassandraTableTest2() throws InterruptedException {
         log.info("containsCassandraTableTest2");
         SiddhiManager siddhiManager = new SiddhiManager();
@@ -139,10 +139,10 @@ public class ContainsInCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
@@ -214,10 +214,10 @@ public class ContainsInCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +

@@ -28,9 +28,11 @@ public class CassandraEventTableConstants {
 
     //Constants that are needed to initiate cassandra connection
     public static final String ANNOTATION_ELEMENT_TABLE_NAME = "column.family";
+    public static final String ANNOTATION_CLIENT_PORT = "client.port";
     public static final String ANNOTATION_ELEMENT_KEY_SPACE = "keyspace";
     public static final String ANNOTATION_HOST = "cassandra.host";
     public static final String DEFAULT_KEY_SPACE = "wso2sp";
+    public static final int DEFAULT_PORT = 9042;
     public static final String ANNOTATION_USER_NAME = "username";
     public static final String ANNOTATION_PASSWORD = "password";
 
@@ -55,7 +57,14 @@ public class CassandraEventTableConstants {
     public static final String OPEN_SQUARE_BRACKET = "[";
     public static final String CLOSE_PARENTHESIS = ")";
     public static final String CLOSE_SQUARE_BRACKET = "]";
+    public static final String CONDITION_CQL_ID = "\"_id\"=?";
     public static final String CONFIG_FILE = "cassandra-table-config.xml";
+
+    public static final String EXCEPTION_MATH_OPERATOR = "Math operators at the beginning of an operation is " +
+            "not supported in Cassandra ";
+    public static final String EXCEPTION_OR_OPERATOR = "supported in cassandra OR operator is not " +
+            "supported in cassandra";
+    public static final String EXCEPTION_NOT_OPERATOR = "NOT_EQUAL operator is not supported in cassandra";
 
     public static final String PLACEHOLDER_COLUMNS = "{{COLUMNS}}";
     public static final String PLACEHOLDER_PRIMARY_KEYS = "{{PRIMARY_KEYS}}";

@@ -1,20 +1,18 @@
-siddhi-store-hbase
+siddhi-store-cassandra
 ======================================
 
-The **siddhi-store-hbase extension** is an extension to <a target="_blank" href="https://wso2.github.io/siddhi">Siddhi</a> that  can be used to persist events to a HBase instance of the users choice.
+The **siddhi-store-cassandra extension** is an extension to <a target="_blank" href="https://wso2.github.io/siddhi">Siddhi</a> that  can be used to persist events to a Cassandra instance of the users choice.
 Find some useful links below:
 
-* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-hbase">Source code</a>
-* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-hbase/releases">Releases</a>
-* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-hbase/issues">Issue tracker</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra">Source code</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/releases">Releases</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/issues">Issue tracker</a>
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-hbase/api/4.0.0-M14-SNAPSHOT">4.0.0-M14-SNAPSHOT</a>.
-
 ## Prerequisites
 
- * A HBase server instance should be started and available for connection via the HBase Java API.
+ * A Cassandra server instance should be started and available for connection via the DataStax Java API.
 
 ## How to use 
 
@@ -22,7 +20,7 @@ Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/si
 
 * You can use this extension in the latest <a target="_blank" href="https://github.com/wso2/product-sp/releases">WSO2 Stream Processor</a> that is a part of <a target="_blank" href="http://wso2.com/analytics?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">WSO2 Analytics</a> offering, with editor, debugger and simulation support. 
 
-* This extension is shipped out-of-the-box with WSO2 Stream Processor, if you wish to use an alternative version of this extension you can replace the component <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-hbase/releases">jar</a> that can be found in the `<STREAM_PROCESSOR_HOME>/lib` directory.
+* This extension is shipped out-of-the-box with WSO2 Stream Processor, if you wish to use an alternative version of this extension you can replace the component <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/releases">jar</a> that can be found in the `<STREAM_PROCESSOR_HOME>/lib` directory.
 
 **Using the extension as a <a target="_blank" href="https://wso2.github.io/siddhi/documentation/running-as-a-java-library">java library</a>**
 
@@ -31,7 +29,7 @@ Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/si
 ```
      <dependency>
         <groupId>org.wso2.extension.siddhi.store.cassandra</groupId>
-        <artifactId>siddhi-store-hbase</artifactId>
+        <artifactId>siddhi-store-cassandra</artifactId>
         <version>x.x.x</version>
      </dependency>
 ```
@@ -42,19 +40,17 @@ Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/si
 
 |  Branch | Build Status |
 | :------ |:------------ | 
-| master  | [![Build Status](https://wso2.org/jenkins/job/siddhi/job/siddhi-store-hbase/badge/icon)](https://wso2.org/jenkins/job/siddhi/job/siddhi-store-hbase/) |
+| master  | [![Build Status](https://wso2.org/jenkins/job/siddhi/job/siddhi-store-cassandra/badge/icon)](https://wso2.org/jenkins/job/siddhi/job/siddhi-store-cassandra/) |
 
 ---
 
 ## Features
 
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-hbase/api/4.0.0-M14-SNAPSHOT/#cassandra-store">cassandra</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#stores">Store</a>)*<br><div style="padding-left: 1em;"><p>This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasources.</p></div>
-
 ## How to Contribute
  
-  * Please report issues at <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-hbase/issues">GitHub Issue Tracker</a>.
+  * Please report issues at <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/issues">GitHub Issue Tracker</a>.
   
-  * Send your contributions as pull requests to <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-hbase/tree/master">master branch</a>. 
+  * Send your contributions as pull requests to <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/tree/master">master branch</a>. 
  
 ## Contact us 
 

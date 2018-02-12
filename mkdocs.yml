@@ -1,4 +1,5 @@
-xtra_css:
+site_name: Siddhi-Store-Cassandra
+extra_css:
 - stylesheets/extra.css
 extra_javascript:
 - javascripts/extra.js
@@ -14,6 +15,6 @@ google_analytics:
 pages:
 - Welcome to WSO2 Siddhi Store Cassandra: index.md
 - API Docs:
-  - 4.0.0-M14-SNAPSHOT: api/1.0.0-SNAPSHOT.md
+
 - License: license.md
 theme: material

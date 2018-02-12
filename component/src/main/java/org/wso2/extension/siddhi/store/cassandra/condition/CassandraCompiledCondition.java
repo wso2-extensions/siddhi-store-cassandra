@@ -20,6 +20,7 @@ package org.wso2.extension.siddhi.store.cassandra.condition;
 import org.wso2.siddhi.core.util.collection.operator.CompiledCondition;
 
 
+import java.util.List;
 import java.util.SortedMap;
 
 /**
@@ -31,17 +32,20 @@ public class CassandraCompiledCondition implements CompiledCondition {
     private String compiledQuery;
     private SortedMap<Integer, Object> parameters;
     private boolean readOnlyCondition;
+    private List<String> storeAttributeNames;
 
     public CassandraCompiledCondition(String compiledQuery, SortedMap<Integer, Object> parameters,
-                                      boolean readOnlyCondition) {
+                                      boolean readOnlyCondition, List<String> storeAttributeNames) {
         this.compiledQuery = compiledQuery;
         this.parameters = parameters;
         this.readOnlyCondition = readOnlyCondition;
+        this.storeAttributeNames = storeAttributeNames;
     }
 
     @Override
     public CompiledCondition cloneCompilation(String key) {
-        return new CassandraCompiledCondition(this.compiledQuery, this.parameters, this.readOnlyCondition);
+        return new CassandraCompiledCondition(this.compiledQuery, this.parameters, this.readOnlyCondition,
+                this.storeAttributeNames);
     }
 
     /**
@@ -76,5 +80,13 @@ public class CassandraCompiledCondition implements CompiledCondition {
      */
     public boolean getReadOnlyCondition() {
         return readOnlyCondition;
+    }
+
+    /**
+     * This method returns the list of attribute names
+     *
+     */
+    public List<String> getStoreAttributeNames() {
+        return storeAttributeNames;
     }
 }

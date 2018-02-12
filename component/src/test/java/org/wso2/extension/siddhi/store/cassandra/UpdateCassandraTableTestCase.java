@@ -31,12 +31,12 @@ import org.wso2.siddhi.core.query.output.callback.QueryCallback;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.util.EventPrinter;
 
-import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.HOST;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.KEY_SPACE;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.PASSWORD;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.TABLE_NAME;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.USER_NAME;
-
+import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getHostIp;
+import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getPort;
 
 public class UpdateCassandraTableTestCase {
     private static final Logger log = Logger.getLogger(UpdateCassandraTableTestCase.class);
@@ -71,10 +71,10 @@ public class UpdateCassandraTableTestCase {
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
 
@@ -153,10 +153,10 @@ public class UpdateCassandraTableTestCase {
                 "define stream UpdateStockStream (symbol string, price double, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol, volume\")" +
                 "define table StockTable (symbol string, price double, volume long); ";
         String query = "" +
@@ -236,10 +236,10 @@ public class UpdateCassandraTableTestCase {
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
@@ -314,10 +314,10 @@ public class UpdateCassandraTableTestCase {
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol, volume\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
@@ -399,10 +399,10 @@ public class UpdateCassandraTableTestCase {
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
@@ -480,10 +480,10 @@ public class UpdateCassandraTableTestCase {
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
 
         String query = "" +
@@ -563,10 +563,10 @@ public class UpdateCassandraTableTestCase {
                 "define stream UpdateStockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string, price float, volume long); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"symbol\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
 

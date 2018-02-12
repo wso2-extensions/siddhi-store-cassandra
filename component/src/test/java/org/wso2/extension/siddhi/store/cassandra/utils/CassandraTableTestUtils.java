@@ -27,24 +27,59 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.extension.siddhi.store.cassandra.exception.CassandraTableException;
 
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.DEFAULT_KEY_SPACE;
+
 public class CassandraTableTestUtils {
 
-    public static final String HOST = "localhost";
+    public static final int PORT = 2375;
+    private static final String HOST = /*"localhost"*/"172.17.0.1";
     public static final String KEY_SPACE = "AnalyticsFamily";
     private static final Log LOG = LogFactory.getLog(CassandraTableTestUtils.class);
     public static final String PASSWORD = "";
     public static final String TABLE_NAME = "CassandraTestTable";
     public static final String USER_NAME = "";
     private static Session session;
+    private static String hostIp;
+    private static int port;
 
     public static void initializeTable() {
         dropTable();
     }
 
+    private static void initHostAndPort() {
+        hostIp = System.getenv("DOCKER_HOST_IP");
+        if (hostIp == null || hostIp.isEmpty()) {
+            hostIp = HOST;
+        }
+        String portString = System.getenv("PORT");
+        if (portString == null || portString.isEmpty()) {
+            port = PORT;
+        } else {
+            port = Integer.parseInt(portString);
+        }
+    }
+
+    public static String getHostIp() {
+        return hostIp;
+    }
+
+    public static int getPort() {
+        return port;
+    }
+
     private static void createConn() {
         //creating Cluster object
-        Cluster cluster = Cluster.builder().addContactPoint(HOST).withCredentials(USER_NAME, PASSWORD).build();
+        initHostAndPort();
+        Cluster cluster = Cluster.builder().addContactPoint(getHostIp()).withPort(getPort()).
+                withCredentials(USER_NAME, PASSWORD).build();
         //Creating Session object
+        session = cluster.connect();
+        String analyticsFamilyKeyspace = "CREATE  KEYSPACE IF NOT EXISTS " + KEY_SPACE + " WITH replication = " +
+                "{'class': 'SimpleStrategy', 'replication_factor' : 1}";
+        String wso2SpKeyspace = "CREATE  KEYSPACE IF NOT EXISTS " + DEFAULT_KEY_SPACE + " WITH replication = " +
+                "{'class': 'SimpleStrategy', 'replication_factor' : 1}";
+        session.execute(analyticsFamilyKeyspace);
+        session.execute(wso2SpKeyspace);
         session = cluster.connect(KEY_SPACE);
     }
 

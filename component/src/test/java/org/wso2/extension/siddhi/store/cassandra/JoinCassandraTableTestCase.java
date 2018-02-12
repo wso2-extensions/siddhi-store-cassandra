@@ -37,11 +37,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.HOST;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.KEY_SPACE;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.PASSWORD;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.TABLE_NAME;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.USER_NAME;
+import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getHostIp;
+import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getPort;
 
 public class JoinCassandraTableTestCase {
     private static final Logger log = Logger.getLogger(JoinCassandraTableTestCase.class);
@@ -79,10 +80,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
                 "@info(name = 'query1') " +
@@ -139,10 +140,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
                 "@info(name = 'query1') " +
@@ -206,10 +207,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol1 string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
                 "@info(name = 'query1') " +
@@ -271,10 +272,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
                 "@info(name = 'query1') " +
@@ -336,10 +337,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
                 "@info(name = 'query1') " +
@@ -401,10 +402,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
                 "@info(name = 'query1') " +
@@ -466,10 +467,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
                 "@info(name = 'query1') " +
@@ -533,10 +534,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float); " +
                 "define stream CheckStockStream (symbol string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float); ";
         String query = "" +
                 "@info(name = 'query1') " +
@@ -603,10 +604,10 @@ public class JoinCassandraTableTestCase {
                 "define stream StockStream (symbol string, price float, volume long); " +
                 "define stream CheckStockStream (symbol string); " +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (symbol string, price float, volume long); ";
         String query = "" +
                 "@info(name = 'query1') " +

@@ -25,12 +25,17 @@ import org.wso2.siddhi.core.table.record.BaseExpressionVisitor;
 import org.wso2.siddhi.query.api.definition.Attribute;
 import org.wso2.siddhi.query.api.expression.condition.Compare;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CLOSE_SQUARE_BRACKET;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.EXCEPTION_MATH_OPERATOR;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.EXCEPTION_NOT_OPERATOR;
+import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.EXCEPTION_OR_OPERATOR;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.OPEN_SQUARE_BRACKET;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.QUESTION_MARK;
 
@@ -54,6 +59,7 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
     private Constant constant;
     private String cqlOperatorString;
     private boolean readOnlyCondition;
+    private List<String> storeAttributeNames;
 
     public CassandraConditionVisitor() {
         this.condition = new StringBuilder();
@@ -62,18 +68,32 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
         this.placeholders = new HashMap<>();
         this.parameters = new TreeMap<>();
         this.readOnlyCondition = true;
+        storeAttributeNames = new ArrayList<>();
     }
 
     /**
      * This returns the compile condition needed to convert siddhi query into cassandra query.
+     * @return returns the compiled condition
      */
     public String returnCondition() {
         this.parametrizeCondition();
         return this.finalCompiledCondition.trim();
     }
 
+    /**
+     * This method will return the store variable attribute list which is used to compare with the persisted keys
+     * @return returns whether the condition is a readonly condition
+     */
     public boolean getReadOnlyCondition() {
         return readOnlyCondition;
+    }
+
+    /**
+     * This method returns the List of store attribute names
+     * @return returns the List of store attribute names
+     */
+    public List<String> getStoreAtrributeNames() {
+        return storeAttributeNames;
     }
 
     /**
@@ -116,42 +136,42 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void beginVisitOr() {
-        throw new OperationNotSupportedException("OR operator is not supported in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_OR_OPERATOR);
     }
 
     @Override
     public void endVisitOr() {
-        throw new OperationNotSupportedException("OR operator is not supported in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_OR_OPERATOR);
     }
 
     @Override
     public void beginVisitOrLeftOperand() {
-        throw new OperationNotSupportedException("OR operator is not supported in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_OR_OPERATOR);
     }
 
     @Override
     public void endVisitOrLeftOperand() {
-        throw new OperationNotSupportedException("OR operator is not supported in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_OR_OPERATOR);
     }
 
     @Override
     public void beginVisitOrRightOperand() {
-        throw new OperationNotSupportedException("OR operator is not supported in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_OR_OPERATOR);
     }
 
     @Override
     public void endVisitOrRightOperand() {
-        throw new OperationNotSupportedException("OR operator is not supported in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_OR_OPERATOR);
     }
 
     @Override
     public void beginVisitNot() {
-        throw new OperationNotSupportedException("NOT operator is not supported in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_NOT_OPERATOR);
     }
 
     @Override
     public void endVisitNot() {
-        throw new OperationNotSupportedException("NOT_EQUAL operator is not supported in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_NOT_OPERATOR);
     }
 
     @Override
@@ -261,38 +281,32 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void beginVisitMath(MathOperator mathOperator) {
-        throw new OperationNotSupportedException("Math operators at the beginning of an operation is not supported " +
-                "in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_MATH_OPERATOR);
     }
 
     @Override
     public void endVisitMath(MathOperator mathOperator) {
-        throw new OperationNotSupportedException("Math operators at the beginning of an operation is not supported " +
-                "in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_MATH_OPERATOR);
     }
 
     @Override
     public void beginVisitMathLeftOperand(MathOperator mathOperator) {
-        throw new OperationNotSupportedException("Math operators at the beginning of an operation is not supported " +
-                "in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_MATH_OPERATOR);
     }
 
     @Override
     public void endVisitMathLeftOperand(MathOperator mathOperator) {
-        throw new OperationNotSupportedException("Math operators at the beginning of an operation is not supported " +
-                "in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_MATH_OPERATOR);
     }
 
     @Override
     public void beginVisitMathRightOperand(MathOperator mathOperator) {
-        throw new OperationNotSupportedException("Math operators at the beginning of an operation is not supported " +
-                "in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_MATH_OPERATOR);
     }
 
     @Override
     public void endVisitMathRightOperand(MathOperator mathOperator) {
-        throw new OperationNotSupportedException("Math operators at the beginning of an operation is not supported " +
-                "in cassandra");
+        throw new OperationNotSupportedException(EXCEPTION_MATH_OPERATOR);
     }
 
     @Override
@@ -374,6 +388,7 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
             processConstant();
         }
         storeVarVisited = true;
+        storeAttributeNames.add(attributeName);
     }
 
     @Override

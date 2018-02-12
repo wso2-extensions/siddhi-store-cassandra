@@ -31,11 +31,12 @@ import org.wso2.siddhi.core.query.output.callback.QueryCallback;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.util.EventPrinter;
 
-import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.HOST;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.KEY_SPACE;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.PASSWORD;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.TABLE_NAME;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.USER_NAME;
+import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getHostIp;
+import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getPort;
 
 public class ReadFromCassandraTableTestCase {
     private static final Logger log = Logger.getLogger(ReadFromCassandraTableTestCase.class);
@@ -70,10 +71,10 @@ public class ReadFromCassandraTableTestCase {
                 "define stream FooStream (name string, category string, volume long);\n" +
                 "define stream StockStream (itemId string, type string, volume long);\n" +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (itemId string, type string, volume long);\n";
 
         String query = "" +
@@ -143,10 +144,10 @@ public class ReadFromCassandraTableTestCase {
                 "define stream StockStream (itemId string, type string, volume long);\n" +
                 "define stream OutputStream (checkName string, checkCategory string, checkVolume long);\n" +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"itemId\")" +
                 "define table StockTable (itemId string, type string, volume long);\n";
 
@@ -184,10 +185,10 @@ public class ReadFromCassandraTableTestCase {
                 "define stream StockStream (itemId string, type string, volume long);\n" +
                 "define stream OutputStream (checkName string, checkCategory string, checkVolume long);\n" +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"itemId\")" +
                 "define table StockTable (itemId string, type string, volume long);\n";
 
@@ -272,10 +273,10 @@ public class ReadFromCassandraTableTestCase {
                 "define stream StockStream (itemId string, type string, volume long);\n" +
                 "define stream OutputStream (checkName string, checkCategory string, checkVolume long);\n" +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "@PrimaryKey(\"itemId\")" +
                 "define table StockTable (itemId string, type string, volume long);\n";
 
@@ -353,10 +354,10 @@ public class ReadFromCassandraTableTestCase {
                 "define stream StockStream (name string, type string, volume long);\n" +
                 "define stream OutputStream (checkName string, checkCategory string, checkVolume double);\n" +
                 "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
-                "keyspace=\"" + KEY_SPACE + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
                 "username=\"" + USER_NAME + "\", " +
                 "password=\"" + PASSWORD + "\", " +
-                "cassandra.host=\"" + HOST + "\")" +
+                "cassandra.host=\"" + getHostIp() + "\")" +
                 "define table StockTable (name string, type string, volume long);\n";
 
         String query = "" +
@@ -411,4 +412,150 @@ public class ReadFromCassandraTableTestCase {
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
     }
+
+    @Test(dependsOnMethods = "readEventCassandraTableTestCase5")
+    public void readEventCassandraTableTestCase6() throws InterruptedException {
+        //Read events from a Cassandra table successfully
+        log.info("readEventCassandraTableTestCase6");
+        SiddhiManager siddhiManager = new SiddhiManager();
+        String streams = "" +
+                "define stream FooStream (name string, category string, volume long);\n" +
+                "define stream StockStream (itemId string, type string, volume long);\n" +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
+                "username=\"" + USER_NAME + "\", " +
+                "password=\"" + PASSWORD + "\", " +
+                "cassandra.host=\"" + getHostIp() + "\")" +
+                "@PrimaryKey(\"itemId\")" +
+                "@IndexBy(\"volume\")" +
+                "define table StockTable (itemId string, type string, volume long);\n";
+
+        String query = "" +
+                "@info(name = 'query1')\n" +
+                "from StockStream\n" +
+                "select *\n" +
+                "insert into StockTable;\n" +
+                "@info(name = 'query2')\n" +
+                "from FooStream#window.length(4) join StockTable on (StockTable.itemId==FooStream.name) and " +
+                "(StockTable.volume==FooStream.volume)\n" +
+                "select FooStream.name as checkName, StockTable.type as checkCategory, " +
+                "StockTable.volume as checkVolume\n" +
+                "insert into OutputStream;";
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(streams + query);
+        InputHandler stockStream = siddhiAppRuntime.getInputHandler("StockStream");
+        InputHandler fooStream = siddhiAppRuntime.getInputHandler("FooStream");
+        siddhiAppRuntime.addCallback("query2", new QueryCallback() {
+            @Override
+            public void receive(long timeStamp, Event[] inEvents, Event[] removeEvents) {
+                EventPrinter.print(timeStamp, inEvents, removeEvents);
+                if (inEvents != null) {
+                    for (Event event : inEvents) {
+                        inEventCount++;
+                        switch (inEventCount) {
+                            case 1:
+                                Assert.assertEquals(event.getData(), new Object[]{"WSO2", "type1", 100L});
+                                break;
+                            case 2:
+                                Assert.assertEquals(event.getData(), new Object[]{"IBM", "type3", 10L});
+                                break;
+                            default:
+                                Assert.assertEquals(2, inEventCount);
+                        }
+                    }
+                    eventArrived = true;
+                }
+                if (removeEvents != null) {
+                    removeEventCount = removeEventCount + removeEvents.length;
+                }
+                eventArrived = true;
+            }
+        });
+
+        siddhiAppRuntime.start();
+
+        stockStream.send(new Object[]{"WSO2", "type1", 100L});
+        stockStream.send(new Object[]{"CSC", "type2", 10L});
+        stockStream.send(new Object[]{"IBM", "type3", 10L});
+        fooStream.send(new Object[]{"WSO2", "type1", 100L});
+        fooStream.send(new Object[]{"IBM", "type3", 10L});
+
+        Thread.sleep(1000);
+
+        Assert.assertEquals(inEventCount, 2, "Number of success events");
+        Assert.assertEquals(removeEventCount, 0, "Number of remove events");
+        Assert.assertEquals(eventArrived, true, "Event arrived");
+        siddhiAppRuntime.shutdown();
+    }
+
+    @Test(/*dependsOnMethods = "readEventCassandraTableTestCase6"*/)
+    public void readEventCassandraTableTestCase7() throws InterruptedException {
+        //Read events from a Cassandra table successfully
+        log.info("readEventCassandraTableTestCase7");
+        SiddhiManager siddhiManager = new SiddhiManager();
+        String streams = "" +
+                "define stream FooStream (name string, category string, volume long);\n" +
+                "define stream FooStream (name string, category string, volume long);\n" +
+                "define stream StockStream (itemId string, type string, volume long);\n" +
+                "@Store(type=\"cassandra\", column.family=\"" + TABLE_NAME + "\", " +
+                "keyspace=\"" + KEY_SPACE + "\", client.port=\"" + getPort() + "\", " +
+                "username=\"" + USER_NAME + "\", " +
+                "password=\"" + PASSWORD + "\", " +
+                "cassandra.host=\"" + getHostIp() + "\")" +
+                "@IndexBy(\"volume\")" +
+                "define table StockTable (itemId string, type string, volume long);\n";
+
+        String query = "" +
+                "@info(name = 'query1')\n" +
+                "from StockStream\n" +
+                "select *\n" +
+                "insert into StockTable;\n" +
+                "@info(name = 'query2')\n" +
+                "from FooStream#window.length(4) join StockTable on (StockTable.volume==FooStream.volume)\n" +
+                "select FooStream.name as checkName, StockTable.type as checkCategory, " +
+                "StockTable.volume as checkVolume\n" +
+                "insert into OutputStream;";
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(streams + query);
+        InputHandler stockStream = siddhiAppRuntime.getInputHandler("StockStream");
+        InputHandler fooStream = siddhiAppRuntime.getInputHandler("FooStream");
+        siddhiAppRuntime.addCallback("query2", new QueryCallback() {
+            @Override
+            public void receive(long timeStamp, Event[] inEvents, Event[] removeEvents) {
+                EventPrinter.print(timeStamp, inEvents, removeEvents);
+                if (inEvents != null) {
+                    for (Event event : inEvents) {
+                        inEventCount++;
+                        switch (inEventCount) {
+                            case 1:
+                                Assert.assertEquals(event.getData(), new Object[]{"WSO2", "type1", 100L});
+                                break;
+                            default:
+                                Assert.assertEquals(2, inEventCount);
+                        }
+                    }
+                    eventArrived = true;
+                }
+                if (removeEvents != null) {
+                    removeEventCount = removeEventCount + removeEvents.length;
+                }
+                eventArrived = true;
+            }
+        });
+
+        siddhiAppRuntime.start();
+
+        stockStream.send(new Object[]{"WSO2", "type1", 100L});
+        stockStream.send(new Object[]{"CSC", "type2", 10L});
+        stockStream.send(new Object[]{"IBM", "type3", 10L});
+        fooStream.send(new Object[]{"WSO2", "type1", 100L});
+
+        Thread.sleep(1000);
+
+        Assert.assertEquals(inEventCount, 1, "Number of success events");
+        Assert.assertEquals(removeEventCount, 0, "Number of remove events");
+        Assert.assertEquals(eventArrived, true, "Event arrived");
+        siddhiAppRuntime.shutdown();
+    }
+
 }
