@@ -15,6 +15,7 @@ google_analytics:
 pages:
 - Welcome to WSO2 Siddhi Store Cassandra: index.md
 - API Docs:
-
-- License: license.md
+  - 1.0.0-SNAPSHOT: api/1.0.0-SNAPSHOT.md
+  - latest: api/latest.md
+  - License: license.md
 theme: material
