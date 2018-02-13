@@ -122,7 +122,6 @@ public class CassandraTableUtils {
 
     /**
      * This will read the cassandra-table-config.xml file which contains the syntax for Cassandra.
-     * @throws JAXBException exception throw when the file cannot be found
      * @throws CannotLoadConfigurationException exception throw when the configuration cannot be loaded
      */
     public CassandraStoreConfig readConfigFile(ConfigReader configReader) throws CannotLoadConfigurationException {

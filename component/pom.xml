@@ -155,14 +155,14 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>integration-test-for-mysql</id>
+                                <id>integration-test-for-cassandra</id>
                                 <phase>integration-test</phase>
                                 <goals>
                                     <goal>integration-test</goal>
                                 </goals>
                             </execution>
                             <execution>
-                                <id>verify-for-mysql</id>
+                                <id>verify-for-cassandra</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>verify</goal>
@@ -211,6 +211,27 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>with-tests</id>
+            <activation>
+                <property>
+                    <name>!maven.test.skip</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.20.1</version>
+                        <configuration>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <build>
@@ -223,7 +244,6 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
-                        <Private-Package />
                         <Export-Package>
                             org.wso2.extension.siddhi.store.cassandra.*
                         </Export-Package>
@@ -233,10 +253,7 @@
                             javax.xml.*;version="0.0.0",
                             org.apache.log4j;version="${aparche.log4j.version.range}",
                             org.wso2.siddhi.core.*;version="${siddhi.core.version.range}",
-                            org.wso2.siddhi.query.*;version="${siddhi.query.version.range}",
-                            com.google.common.*;version="${guava.import.version.range}",
-                            com.codahale.metrics.*;version="${codehale.import.version.range}",
-                            org.jboss.netty.*;version="${jboss.import.version.range}"
+                            org.wso2.siddhi.query.*;version="${siddhi.query.version.range}"
                         </Import-Package>
                         <Include-Resource>
                             META-INF=target/classes/META-INF,

@@ -49,7 +49,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">keyspace</td>
-        <td style="vertical-align: top; word-wrap: break-word">User need to give the keyspace that the data is persisted. It is ven by the keyspace parameter</td>
+        <td style="vertical-align: top; word-wrap: break-word">User need to give the keyspace that the data is persisted. Keyspace name is specified via this parameter.</td>
         <td style="vertical-align: top">'cassandraTestTable'</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>

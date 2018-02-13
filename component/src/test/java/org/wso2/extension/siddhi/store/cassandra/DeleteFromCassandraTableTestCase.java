@@ -28,6 +28,9 @@ import org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils;
 import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.stream.input.InputHandler;
+import org.wso2.siddhi.core.util.SiddhiTestHelper;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.KEY_SPACE;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.PASSWORD;
@@ -88,7 +91,7 @@ public class DeleteFromCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 57.6F, 100L});
         deleteStockStream.send(new Object[]{"IBM"});
         deleteStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 5, new AtomicInteger(5), 10000);
 
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 0, "Deletion failed");
@@ -131,7 +134,7 @@ public class DeleteFromCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 57.6F, 100L});
         deleteStockStream.send(new Object[]{"IBM", 57.6F, 100L});
         deleteStockStream.send(new Object[]{"WSO2", 57.6F, 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 5, new AtomicInteger(5), 10000);
 
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 0, "Deletion failed");
@@ -173,7 +176,7 @@ public class DeleteFromCassandraTableTestCase {
         stockStream.send(new Object[]{"IBM", 75.6F, 100L});
         stockStream.send(new Object[]{"WSO2", 57.6F, 100L});
         deleteStockStream.send(new Object[]{"IBM", 57.6F, 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 4, new AtomicInteger(4), 10000);
 
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 1, "Deletion failed");
@@ -214,7 +217,7 @@ public class DeleteFromCassandraTableTestCase {
         stockStream.send(new Object[]{"IBM", 75.6F, 100L});
         stockStream.send(new Object[]{"WSO2", 57.6F, 100L});
         deleteStockStream.send(new Object[]{"IBM", 57.6F, 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 4, new AtomicInteger(4), 10000);
 
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 1, "Deletion failed");
@@ -256,7 +259,7 @@ public class DeleteFromCassandraTableTestCase {
         stockStream.send(new Object[]{"IBM", 75.6F, 100L});
         stockStream.send(new Object[]{"IBM", 57.6F, 100L});
         deleteStockStream.send(new Object[]{"IBM", 57.6F, 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 4, new AtomicInteger(4), 10000);
 
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 1, "Deletion failed");
@@ -299,7 +302,7 @@ public class DeleteFromCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 57.6F, 100L});
         deleteStockStream.send(new Object[]{"IBM", 57.6F, 100L});
         deleteStockStream.send(new Object[]{"WSO2", 57.6F, 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 5, new AtomicInteger(5), 10000);
 
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 0, "Deletion failed");
@@ -340,7 +343,7 @@ public class DeleteFromCassandraTableTestCase {
         stockStream.send(new Object[]{"IBM", 100L});
         stockStream.send(new Object[]{"WSO2", 100L});
         deleteStockStream.send(new Object[]{"WSO2", 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 4, new AtomicInteger(4), 10000);
 
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 1, "Deletion failed");

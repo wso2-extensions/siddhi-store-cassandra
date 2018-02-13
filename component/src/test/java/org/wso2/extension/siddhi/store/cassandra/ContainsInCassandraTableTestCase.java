@@ -30,6 +30,9 @@ import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.query.output.callback.QueryCallback;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.util.EventPrinter;
+import org.wso2.siddhi.core.util.SiddhiTestHelper;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.KEY_SPACE;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.PASSWORD;
@@ -41,15 +44,15 @@ import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTest
 
 public class ContainsInCassandraTableTestCase {
     private static final Logger log = Logger.getLogger(ContainsInCassandraTableTestCase.class);
-    private int inEventCount;
     private int removeEventCount;
     private boolean eventArrived;
+    private AtomicInteger inEventCount;
 
     @BeforeMethod
     public void init() {
-        inEventCount = 0;
         removeEventCount = 0;
         eventArrived = false;
+        inEventCount = new AtomicInteger(0);
         CassandraTableTestUtils.initializeTable();
     }
 
@@ -93,8 +96,8 @@ public class ContainsInCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"IBM", 100L});
                                 break;
@@ -122,9 +125,9 @@ public class ContainsInCassandraTableTestCase {
         stockStream.send(new Object[]{"IBM", 55.6f, 100L});
         checkStockStream.send(new Object[]{"IBM", 100L});
         checkStockStream.send(new Object[]{"WSO2", 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 2, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 2, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 2, "Number of success events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 2, "Update operation failed");
@@ -161,8 +164,8 @@ public class ContainsInCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"IBM", 100L},
                                         "Event should be {IBM, 100}");
@@ -196,9 +199,9 @@ public class ContainsInCassandraTableTestCase {
         checkStockStream.send(new Object[]{"IBM", 100L});
         checkStockStream.send(new Object[]{"WSO2", 100L});
         checkStockStream.send(new Object[]{"IBM", 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 2, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 3, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 3, "Number of success events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 3, "Update operation failed");
@@ -236,8 +239,8 @@ public class ContainsInCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"WSO2", 100L});
                                 break;
@@ -265,9 +268,9 @@ public class ContainsInCassandraTableTestCase {
         stockStream.send(new Object[]{"IBM", 55.6f, 100L});
         checkStockStream.send(new Object[]{"WSO2", 100L});
         checkStockStream.send(new Object[]{"IBM", 100L});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 2, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 2, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 2, "Number of success events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         long totalRowsInTable = CassandraTableTestUtils.getRowsInTable();
         Assert.assertEquals(totalRowsInTable, 2, "Update operation failed");

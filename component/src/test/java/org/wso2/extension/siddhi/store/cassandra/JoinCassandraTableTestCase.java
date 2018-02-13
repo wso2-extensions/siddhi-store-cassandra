@@ -31,11 +31,13 @@ import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.query.output.callback.QueryCallback;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.util.EventPrinter;
+import org.wso2.siddhi.core.util.SiddhiTestHelper;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.KEY_SPACE;
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.PASSWORD;
@@ -46,13 +48,13 @@ import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTest
 
 public class JoinCassandraTableTestCase {
     private static final Logger log = Logger.getLogger(JoinCassandraTableTestCase.class);
-    private int inEventCount;
+    private AtomicInteger inEventCount;
     private int removeEventCount;
     private boolean eventArrived;
 
     @BeforeMethod
     public void init() {
-        inEventCount = 0;
+        inEventCount = new AtomicInteger(0);
         removeEventCount = 0;
         eventArrived = false;
         CassandraTableTestUtils.initializeTable();
@@ -103,7 +105,7 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
+                        inEventCount.incrementAndGet();
                         receivedEvents.add(Arrays.asList(event.getData()));
                     }
                     eventArrived = true;
@@ -123,9 +125,9 @@ public class JoinCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 55.6f, 100L});
         stockStream.send(new Object[]{"IBM", 75.6f, 10L});
         checkStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 2, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 2, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 2, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         Assert.assertEquals(actualEvents, receivedEvents);
@@ -164,8 +166,8 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"WSO2", "WSO2", 100L});
                                 break;
@@ -190,9 +192,9 @@ public class JoinCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 55.6f, 100L});
         stockStream.send(new Object[]{"IBM", 75.6f, 10L});
         checkStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 1, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 1, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 1, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(true, eventArrived, "Event arrived");
         siddhiAppRuntime.shutdown();
@@ -230,8 +232,8 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"WSO2", "WSO2", 100L});
                                 break;
@@ -256,9 +258,9 @@ public class JoinCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 55.6f, 100L});
         stockStream.send(new Object[]{"IBM", 75.6f, 10L});
         checkStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 1, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 1, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 1, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
@@ -295,8 +297,8 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"WSO2", "WSO2", 100L});
                                 break;
@@ -321,9 +323,9 @@ public class JoinCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 55.6f, 100L});
         stockStream.send(new Object[]{"IBM", 75.6f, 10L});
         checkStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 1, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 1, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 1, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
@@ -360,8 +362,8 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"WSO2", "WSO2", 100L});
                                 break;
@@ -385,9 +387,9 @@ public class JoinCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 55.6f, 100L});
         stockStream.send(new Object[]{"IBM", 75.6f, 10L});
         checkStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 1, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 1, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 1, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
@@ -425,8 +427,8 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"WSO2", "WSO2", 100L});
                                 break;
@@ -451,9 +453,9 @@ public class JoinCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 55.6f, 100L});
         stockStream.send(new Object[]{"IBM", 75.6f, 10L});
         checkStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 1, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 1, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 1, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
@@ -491,8 +493,8 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"WSO2", "WSO2", 100L});
                                 break;
@@ -517,9 +519,9 @@ public class JoinCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 55.6f, 100L});
         stockStream.send(new Object[]{"IBM", 75.6f, 10L});
         checkStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 1, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 1, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 1, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
@@ -557,8 +559,8 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
-                        switch (inEventCount) {
+                        inEventCount.incrementAndGet();
+                        switch (inEventCount.get()) {
                             case 1:
                                 Assert.assertEquals(event.getData(), new Object[]{"WSO2", "WSO2"});
                                 break;
@@ -585,7 +587,7 @@ public class JoinCassandraTableTestCase {
         checkStockStream.send(new Object[]{"WSO2"});
         Thread.sleep(1000);
 
-        Assert.assertEquals(inEventCount, 1, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 1, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
@@ -627,7 +629,7 @@ public class JoinCassandraTableTestCase {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
                     for (Event event : inEvents) {
-                        inEventCount++;
+                        inEventCount.incrementAndGet();
                         receivedEvents.add(Arrays.asList(event.getData()));
                     }
                     eventArrived = true;
@@ -647,9 +649,9 @@ public class JoinCassandraTableTestCase {
         stockStream.send(new Object[]{"WSO2", 55.6f, 100L});
         stockStream.send(new Object[]{"IBM", 75.6f, 10L});
         checkStockStream.send(new Object[]{"WSO2"});
-        Thread.sleep(1000);
+        SiddhiTestHelper.waitForEvents(200, 2, inEventCount, 10000);
 
-        Assert.assertEquals(inEventCount, 2, "Number of success events");
+        Assert.assertEquals(inEventCount.get(), 2, "Number of success events");
         Assert.assertEquals(removeEventCount, 0, "Number of remove events");
         Assert.assertEquals(eventArrived, true, "Event arrived");
         Assert.assertEquals(actualEvents, receivedEvents);

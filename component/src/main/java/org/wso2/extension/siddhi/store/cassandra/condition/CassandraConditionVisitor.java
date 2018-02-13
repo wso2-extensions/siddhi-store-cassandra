@@ -359,7 +359,8 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
         if (this.streamVariable != null) {
             this.placeholders.put(name, new Attribute(streamVariable.getName(), streamVariable.getType()));
         }
-        condition.append("[").append(name).append("]").append(CassandraEventTableConstants.WHITESPACE);
+        condition.append(OPEN_SQUARE_BRACKET).append(name).append(CLOSE_SQUARE_BRACKET).
+                append(CassandraEventTableConstants.WHITESPACE);
     }
 
     /**
@@ -368,7 +369,8 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
     private void processConstant() {
         String name = this.generateConstantName();
         this.placeholders.put(name, this.constant);
-        condition.append("[").append(name).append("]").append(CassandraEventTableConstants.WHITESPACE);
+        condition.append(OPEN_SQUARE_BRACKET).append(name).append(CLOSE_SQUARE_BRACKET).
+                append(CassandraEventTableConstants.WHITESPACE);
     }
 
     @Override

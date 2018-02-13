@@ -31,8 +31,7 @@ import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTable
 
 public class CassandraTableTestUtils {
 
-    public static final int PORT = 2375;
-    private static final String HOST = /*"localhost"*/"172.17.0.1";
+    private static final String HOST = "localhost";
     public static final String KEY_SPACE = "AnalyticsFamily";
     private static final Log LOG = LogFactory.getLog(CassandraTableTestUtils.class);
     public static final String PASSWORD = "";
@@ -53,7 +52,7 @@ public class CassandraTableTestUtils {
         }
         String portString = System.getenv("PORT");
         if (portString == null || portString.isEmpty()) {
-            port = PORT;
+            port = 9042;
         } else {
             port = Integer.parseInt(portString);
         }

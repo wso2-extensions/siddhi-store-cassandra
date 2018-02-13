@@ -50,9 +50,6 @@
         <siddhi.core.version.range>[4.0,5.0)</siddhi.core.version.range>
         <siddhi.query.version.range>[4.0,5.0)</siddhi.query.version.range>
         <aparche.log4j.version.range>[1.0,2.0)</aparche.log4j.version.range>
-        <guava.import.version.range>[19.0, 20.0)</guava.import.version.range>
-        <codehale.import.version.range>[3.0, 4.0)</codehale.import.version.range>
-        <jboss.import.version.range>[3.9,4.0)</jboss.import.version.range>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

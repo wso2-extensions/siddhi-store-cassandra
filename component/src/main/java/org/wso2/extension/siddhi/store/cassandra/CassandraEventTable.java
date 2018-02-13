@@ -26,6 +26,7 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 
+import com.datastax.driver.core.exceptions.NoHostAvailableException;
 import org.apache.log4j.Logger;
 
 import org.wso2.extension.siddhi.store.cassandra.condition.CassandraCompiledCondition;
@@ -111,8 +112,6 @@ import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTable
 
 import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
 
-
-
 /**
  * Class representing the Cassandra Event Table implementation.
  */
@@ -141,7 +140,7 @@ import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
                         defaultValue = "9042"),
                 @Parameter(name = "keyspace",
                         description = "User need to give the keyspace that the data is persisted. " +
-                                "It is ven by the keyspace parameter",
+                                "Keyspace name is specified via this parameter.",
                         type = {DataType.STRING},
                         defaultValue = "'cassandraTestTable'"),
                 @Parameter(name = "username",
@@ -209,13 +208,16 @@ public class CassandraEventTable extends AbstractRecordTable {
                 tableDefinition.getAnnotations());
         this.indexAnnotation = AnnotationHelper.getAnnotation(SiddhiConstants.ANNOTATION_INDEX_BY,
                 tableDefinition.getAnnotations());
-        String storeAnnTableName = storeAnnotation.getElement(ANNOTATION_ELEMENT_TABLE_NAME);
-        String storeAnnKeyspace = storeAnnotation.getElement(ANNOTATION_ELEMENT_KEY_SPACE);
-        String storeAnnPort = storeAnnotation.getElement(ANNOTATION_CLIENT_PORT);
-        this.tableName = CassandraTableUtils.isEmpty(storeAnnTableName) ? tableDefinition.getId() : storeAnnTableName;
+        String storeAnnotationTableName = storeAnnotation.getElement(ANNOTATION_ELEMENT_TABLE_NAME);
+        String storeAnnotationKeyspace = storeAnnotation.getElement(ANNOTATION_ELEMENT_KEY_SPACE);
+        String storeAnnotationPort = storeAnnotation.getElement(ANNOTATION_CLIENT_PORT);
+        this.tableName = CassandraTableUtils.isEmpty(storeAnnotationTableName) ? tableDefinition.getId() :
+                storeAnnotationTableName;
         this.host = storeAnnotation.getElement(ANNOTATION_HOST);
-        this.keyspace = CassandraTableUtils.isEmpty(storeAnnKeyspace) ? DEFAULT_KEY_SPACE : storeAnnKeyspace;
-        this.port = CassandraTableUtils.isEmpty(storeAnnPort) ? DEFAULT_PORT : Integer.parseInt(storeAnnPort);
+        this.keyspace = CassandraTableUtils.isEmpty(storeAnnotationKeyspace) ? DEFAULT_KEY_SPACE :
+                storeAnnotationKeyspace;
+        this.port = CassandraTableUtils.isEmpty(storeAnnotationPort) ? DEFAULT_PORT :
+                Integer.parseInt(storeAnnotationPort);
 
         // loading cassandra config file
         try {
@@ -261,10 +263,10 @@ public class CassandraEventTable extends AbstractRecordTable {
 
     @Override
     protected RecordIterator<Object[]> find(Map<String, Object> findConditionParameterMap,
-                                            CompiledCondition compiledCondition) throws ConnectionUnavailableException {
+                                            CompiledCondition compiledCondition)
+            throws ConnectionUnavailableException {
         CassandraCompiledCondition cassandraCompiledCondition = (CassandraCompiledCondition) compiledCondition;
         String compiledQuery = cassandraCompiledCondition.getCompiledQuery();
-        //This array consists of values to be passed to the prepared statement
         String finalSearchQuery;
         PreparedStatement preparedStatement;
         ResultSet result;
@@ -281,12 +283,14 @@ public class CassandraEventTable extends AbstractRecordTable {
                 finalSearchQuery = selectQuery.replace(PLACEHOLDER_CONDITION, compiledQuery)
                         .replace(CQL_FILTERING, "");
                 preparedStatement = session.prepare(finalSearchQuery);
+                //This array consists of values to be passed to the prepared statement
                 Object[] argSet = constructArgSet(compiledCondition, findConditionParameterMap);
                 BoundStatement bound = preparedStatement.bind(argSet);
                 result = session.execute(bound);
             } else {
                 finalSearchQuery = selectQuery.replace(PLACEHOLDER_CONDITION, compiledQuery);
                 preparedStatement = session.prepare(finalSearchQuery);
+                //This array consists of values to be passed to the prepared statement
                 Object[] argSet = constructArgSet(compiledCondition, findConditionParameterMap);
                 BoundStatement bound = preparedStatement.bind(argSet);
                 result = session.execute(bound);
@@ -305,7 +309,7 @@ public class CassandraEventTable extends AbstractRecordTable {
                 noOfIndexesInFind++;
             }
             if (noOfIndexesInFind == 2) {
-                break;
+                return false;
             }
         }
         return noOfIndexesInFind == 1;
@@ -435,14 +439,19 @@ public class CassandraEventTable extends AbstractRecordTable {
         String username = storeAnnotation.getElement(ANNOTATION_USER_NAME);
         String password = storeAnnotation.getElement(ANNOTATION_PASSWORD);
         Cluster cluster;
-        if (username.isEmpty() && password.isEmpty()) {
-            cluster = Cluster.builder().addContactPoint(host).withPort(port).build();
-        } else {
-            cluster = Cluster.builder().addContactPoint(host).withCredentials(username, password).build();
+        try {
+            if (username.isEmpty() && password.isEmpty()) {
+                cluster = Cluster.builder().addContactPoint(host).withPort(port).build();
+            } else {
+                cluster = Cluster.builder().addContactPoint(host).withPort(port).
+                        withCredentials(username, password).build();
+            }
+            session = cluster.connect(storeAnnotation.getElement(keyspace));
+        } catch (NoHostAvailableException e) {
+            throw new ConnectionUnavailableException("Tried to connect to a host, but no host is found.", e);
         }
         // NoHostAvailableException: All host(s) tried for query failed   when the connection is not established..
         // Runtime error thrown
-        session = cluster.connect(storeAnnotation.getElement(keyspace));
         checkTable();
         LOG.info("Store " + keyspace + "." + tableName + " is initialized");
     }
@@ -472,6 +481,7 @@ public class CassandraEventTable extends AbstractRecordTable {
         out.flush();
         byte[] dataToBytes = bos.toByteArray();
         bos.close();
+        out.close();
         return ByteBuffer.wrap(dataToBytes);
     }
 
@@ -676,7 +686,7 @@ public class CassandraEventTable extends AbstractRecordTable {
         for (String key : keys) {
             if (updateParameterMap.containsKey(key)) {
                 LOG.warn("Primary key " + key + " is included in the set values. Note that those values " +
-                        "are ignored in the execution");
+                        "are ignored in the execution in " + keyspace + "." + tableName);
                 updateParameterMap.remove(key);
             }
         }

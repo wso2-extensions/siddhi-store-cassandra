@@ -42,41 +42,16 @@ public class CassandraIterator implements RecordIterator<Object[]> {
         this.attributes = attributes;
     }
 
-    /**
-     * Closes this stream and releases any system resources associated
-     * with it. If the stream is already closed then invoking this
-     * method has no effect.
-     * <p>
-     * <p> As noted in {@link AutoCloseable#close()}, cases where the
-     * close may fail require careful attention. It is strongly advised
-     * to relinquish the underlying resources and to internally
-     * <em>mark</em> the {@code Closeable} as closed, prior to throwing
-     * the {@code IOException}.
-     *
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     public void close() throws IOException {
         // Not supported in cassandra
     }
 
-    /**
-     * Returns {@code true} if the iteration has more elements.
-     * (In other words, returns {@code true} if {@link #next} would
-     * return an element rather than throwing an exception.)
-     *
-     * @return {@code true} if the iteration has more elements
-     */
     @Override
     public boolean hasNext() {
         return this.iterator.hasNext();
     }
 
-    /**
-     * Returns the next element in the iteration.
-     *
-     * @return the next element in the iteration
-     */
     @Override
     public Object[] next() {
         Row row = iterator.next();
@@ -122,22 +97,4 @@ public class CassandraIterator implements RecordIterator<Object[]> {
         });
         return result.toArray();
     }
-
-    /*
-    *//**
-     *
-     * @param row the {@link Row} from which the values should be retrieved.
-     * @param attributeName name of the attribute
-     * @return Object consists of object data
-     * @throws IOException throws this exception is the in closing the input stream
-     * @throws ClassNotFoundException throws this exception if the object cannot be read
-     *//*
-    private Object objectDataReadResolver(Row row, String attributeName) throws IOException, ClassNotFoundException {
-        ByteBuffer data = row.getBytes(attributeName);
-        ByteArrayInputStream bis = new ByteArrayInputStream(data.array());
-        ObjectInput in = new ObjectInputStream(bis);
-        Object object = in.readObject();
-        in.close();
-        return object;
-    }*/
 }

@@ -18,8 +18,6 @@
 package org.wso2.extension.siddhi.store.cassandra.condition;
 
 import org.wso2.siddhi.core.util.collection.operator.CompiledCondition;
-
-
 import java.util.List;
 import java.util.SortedMap;
 

@@ -17,6 +17,7 @@
   ~ under the License.
   -->
 <cassandraStoreConfig>
+
     <tableCreateQuery>CREATE TABLE {{KEYSPACE}}.{{TABLE}} ({{COLUMNS}}{{PRIMARY_KEYS}})</tableCreateQuery>
     <tableCheckQuery>SELECT table_name FROM system_schema.tables where keyspace_name='{{KEYSPACE}}' AND table_name='{{TABLE}}'</tableCheckQuery>
     <tableValidityQuery>SELECT column_name,kind,type FROM system_schema.columns WHERE keyspace_name='{{KEYSPACE}}' AND table_name='{{TABLE}}'</tableValidityQuery>
@@ -27,4 +28,5 @@
     <recordSelectQuery>SELECT {{SELECT_VALUES}} FROM {{KEYSPACE}}.{{TABLE}} WHERE {{CONDITION}} ALLOW FILTERING</recordSelectQuery>
     <recordSelectNoKeyTable>SELECT "_id" FROM {{KEYSPACE}}.{{TABLE}} WHERE {{CONDITION}} ALLOW FILTERING</recordSelectNoKeyTable>
     <recordUpdateQuery>UPDATE {{KEYSPACE}}.{{TABLE}} SET {{COLUMNS_AND_VALUES}} WHERE {{CONDITION}}</recordUpdateQuery>
+
 </cassandraStoreConfig>
