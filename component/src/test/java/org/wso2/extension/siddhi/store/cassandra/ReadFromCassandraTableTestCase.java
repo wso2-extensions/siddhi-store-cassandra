@@ -557,5 +557,4 @@ public class ReadFromCassandraTableTestCase {
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
     }
-
 }

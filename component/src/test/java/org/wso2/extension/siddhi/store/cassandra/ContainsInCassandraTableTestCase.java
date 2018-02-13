@@ -208,7 +208,6 @@ public class ContainsInCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-
     @Test(dependsOnMethods = "containsCassandraTableTest2")
     public void containsCassandraTableTest3() throws InterruptedException {
         log.info("containsCassandraTableTest3");

@@ -141,7 +141,6 @@ public class DeleteFromCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-
     @Test(dependsOnMethods = "deleteFromCassandraTableTest2")
     public void deleteFromCassandraTableTest3() throws InterruptedException {
         // Testing simple deletion with primary keys with one operand as a constant.
@@ -223,7 +222,6 @@ public class DeleteFromCassandraTableTestCase {
         Assert.assertEquals(totalRowsInTable, 1, "Deletion failed");
         siddhiAppRuntime.shutdown();
     }
-
 
     @Test(dependsOnMethods = "deleteFromCassandraTableTest4")
     public void deleteFromCassandraTableTest5() throws InterruptedException {

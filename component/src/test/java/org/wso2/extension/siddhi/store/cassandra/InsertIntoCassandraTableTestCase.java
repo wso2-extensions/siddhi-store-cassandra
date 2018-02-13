@@ -43,8 +43,6 @@ import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTest
 import static org.wso2.extension.siddhi.store.cassandra.utils.CassandraTableTestUtils.getPort;
 
 public class InsertIntoCassandraTableTestCase {
-
-
     private static final Logger log = Logger.getLogger(InsertIntoCassandraTableTestCase.class);
     private AtomicInteger inEventCount;
     private int removeEventCount;
@@ -308,6 +306,4 @@ public class InsertIntoCassandraTableTestCase {
         Thread.sleep(1000);
         siddhiAppRuntime.shutdown();
     }
-
-
 }

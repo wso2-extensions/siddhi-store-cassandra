@@ -200,7 +200,6 @@ public class JoinCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-
     @Test(dependsOnMethods = "testTableJoinQuery2")
     public void testTableJoinQuery3() throws InterruptedException {
         log.info("testTableJoinQuery3");
@@ -526,7 +525,6 @@ public class JoinCassandraTableTestCase {
         Assert.assertEquals(eventArrived, true, "Event arrived");
         siddhiAppRuntime.shutdown();
     }
-
 
     @Test(dependsOnMethods = "testTableJoinQuery7")
     public void testTableJoinQuery8() throws InterruptedException {

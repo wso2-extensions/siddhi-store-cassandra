@@ -315,7 +315,6 @@ public class CassandraEventTable extends AbstractRecordTable {
         return noOfIndexesInFind == 1;
     }
 
-
     @Override
     protected boolean contains(Map<String, Object> containsConditionParameterMap,
                                CompiledCondition compiledCondition) throws ConnectionUnavailableException {
@@ -507,7 +506,6 @@ public class CassandraEventTable extends AbstractRecordTable {
 
     /**
      * Find arguments to matching the compiled condition
-     *
      * @param compiledCondition map of matching StreamVariable Ids and their values
      *                                  corresponding to the compiled condition
      * @param conditionParameterMap         the compiledCondition against which records should be matched
@@ -750,7 +748,6 @@ public class CassandraEventTable extends AbstractRecordTable {
      * @param compiledCondition the compiledCondition against which records should be matched
      * @param updateConditionParameterMaps map of condition parameters
      */
-
     private void updateSingleRow(Map<String, Object> updateSetParameterMap, CompiledCondition compiledCondition,
                                  Map<String, Object> updateConditionParameterMaps) {
         List<String> keys = new ArrayList<>();
@@ -764,8 +761,8 @@ public class CassandraEventTable extends AbstractRecordTable {
         //Since cassandra cannot update a primary key column we need to remove the primary key values sent
         for (String key : keys) {
             if (updateSetParameterMap.containsKey(key)) {
-                LOG.warn("Warning : Primary key '" + key + "' is included in the set values. Note that those values " +
-                        "are ignored in the execution");
+                LOG.warn("Primary key " + key + " is included in the set values. Note that those values " +
+                        "are ignored in the execution in " + keyspace + "." + tableName);
                 updateSetParameterMap.remove(key);
             }
         }
@@ -839,7 +836,6 @@ public class CassandraEventTable extends AbstractRecordTable {
 
     /**
      * This is used to updateOrAdd a row in table where primary key is not defined
-     *
      * @param updateSetParameterMap set parameters used to update the table
      */
     private void updateOrAddToNoKeyTable(Map<String, Object> updateSetParameterMap) {
@@ -857,7 +853,6 @@ public class CassandraEventTable extends AbstractRecordTable {
 
     /**
      * This will call updateSingleRow (updating logic) used in update method
-     *
      * @param updateSetParameterMap set parameters used to update the table
      * @param compiledCondition the compiledCondition against which records should be matched
      * @param updateConditionParameterMaps map of condition parameters

@@ -47,7 +47,6 @@ public class CassandraConditionVisitor extends BaseExpressionVisitor {
 
     private StringBuilder condition;
     private String finalCompiledCondition;
-
     private Map<String, Object> placeholders;
     private SortedMap<Integer, Object> parameters;
     private int streamVarCount;

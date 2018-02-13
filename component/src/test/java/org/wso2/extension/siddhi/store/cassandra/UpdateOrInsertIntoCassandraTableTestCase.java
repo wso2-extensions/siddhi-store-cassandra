@@ -583,7 +583,6 @@ public class UpdateOrInsertIntoCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-
     @Test(dependsOnMethods = "updateOrInsertTableTest6")
     public void updateOrInsertTableTest7() throws InterruptedException, SQLException {
         log.info("updateOrInsertTableTest7");

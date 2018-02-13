@@ -251,7 +251,6 @@ public class DefineCassandraTableTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-
     @Test(testName = "cassandratabledefinitiontest4", description = "testing with no user defined primary keys",
             dependsOnMethods = "cassandratabledefinitiontest3")
     public void cassandratabledefinitiontest4() throws InterruptedException {
