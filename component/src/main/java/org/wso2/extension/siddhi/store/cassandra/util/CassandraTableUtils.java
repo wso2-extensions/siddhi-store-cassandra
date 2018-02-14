@@ -37,7 +37,7 @@ import javax.xml.bind.Unmarshaller;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.CONFIG_FILE;
 
 /**
- * Class for holding various utility methods required by by the HBase table implementation.
+ * Class for holding various utility methods required by by the cassandra table implementation.
  */
 public class CassandraTableUtils {
 

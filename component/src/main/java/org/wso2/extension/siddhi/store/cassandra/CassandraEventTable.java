@@ -161,10 +161,10 @@ import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
         examples = {
                 @Example(
                         syntax = "define stream StockStream (symbol string, price float, volume long); \n" +
-                                "@Store(type=\"cassandra\", table.name=\"StockTable\",keyspace=\"AnalyticsFamily\"," +
-                                "username=\"cassandra\",password=\"cassandra\",cassandra.host=\"localhost\")" +
-                                "@IndexBy(\"volume\")" +
-                                "@PrimaryKey(\"symbol\")" +
+                                "@Store(type=\'cassandra\', table.name=\'StockTable\',keyspace=\'AnalyticsFamily\'," +
+                                "username=\'cassandra\',password=\'cassandra\',cassandra.host=\'localhost\')" +
+                                "@IndexBy(\'volume\')" +
+                                "@PrimaryKey(\'symbol\')" +
                                 "define table StockTable (symbol string, price float, volume long); ",
                         description = "This definition creates an event table named `StockTable` with a column " +
                                 "family `StockCF` on the Cassandra instance if it does not already exist (with 3 " +

@@ -18,7 +18,7 @@
 package org.wso2.extension.siddhi.store.cassandra.util;
 
 /**
- * Class for maintaining constants used by the HBase table implementation.
+ * Class for maintaining constants used by the Cassandra table implementation.
  */
 public class CassandraEventTableConstants {
 

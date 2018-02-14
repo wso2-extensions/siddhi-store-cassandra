@@ -254,7 +254,7 @@ public class DefineCassandraTableTestCase {
     @Test(testName = "cassandratabledefinitiontest4", description = "testing with no user defined primary keys",
             dependsOnMethods = "cassandratabledefinitiontest3")
     public void cassandratabledefinitiontest4() throws InterruptedException {
-        //Testing table creation with an additional HBase configuration property.
+        //Testing table creation with an additional Cassandra configuration property.
         log.info("cassandratabledefinitiontest4");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +

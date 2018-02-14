@@ -68,7 +68,7 @@ public class InsertIntoCassandraTableTestCase {
 
     @Test(description = "Testing table creation.")
     public void cassandrainsertiontest1() throws InterruptedException {
-        //Configure siddhi to insert events data to the HBase table only from specific fields of the stream.
+        //Configure siddhi to insert events data to the Cassandra table only from specific fields of the stream.
         log.info("casandrainsertiontest1");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +

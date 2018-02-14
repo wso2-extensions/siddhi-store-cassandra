@@ -148,7 +148,7 @@ public class UpdateCassandraTableTestCase {
 
     @Test(dependsOnMethods = "updateFromTableTest1")
     public void updateFromTableTest2() throws InterruptedException {
-        //Check for update event data in HBase table when multiple key conditions are true.
+        //Check for update event data in Cassandra table when multiple key conditions are true.
         log.info("updateFromTableTest2");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
@@ -475,7 +475,7 @@ public class UpdateCassandraTableTestCase {
     //Without primary keys
     @Test(dependsOnMethods = "updateFromTableTest5")
     public void updateFromTableTest6() throws InterruptedException {
-        //Check for update event data in HBase table when a primary key condition is true.
+        //Check for update event data in Cassandra table when a primary key condition is true.
         log.info("updateFromTableTest6");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
@@ -558,7 +558,7 @@ public class UpdateCassandraTableTestCase {
 
     @Test(dependsOnMethods = "updateFromTableTest6")
     public void updateFromTableTest7() throws InterruptedException {
-        //Check for update event data in HBase table when a primary key condition is true.
+        //Check for update event data in Cassandra table when a primary key condition is true.
         log.info("updateFromTableTest7");
         SiddhiManager siddhiManager = new SiddhiManager();
         String streams = "" +
