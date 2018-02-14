@@ -253,7 +253,7 @@ public class InsertIntoCassandraTableTestCase {
                 "insert into OutStream;";
 
         log.info(streams + query);
-        TestOb testOb = new TestOb("1", "Tharindu");
+        TestOb testOb = new TestOb("1", "WSO2");
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(streams + query);
 
         siddhiAppRuntime.addCallback("query2", new QueryCallback() {
