@@ -58,7 +58,7 @@
     <tr>
         <td style="vertical-align: top">username</td>
         <td style="vertical-align: top; word-wrap: break-word">Through user name user can specify the relevent username that is used to log in to the cassandra keyspace .</td>
-        <td style="vertical-align: top">null</td>
+        <td style="vertical-align: top">The username of the keyspace</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
@@ -66,7 +66,7 @@
     <tr>
         <td style="vertical-align: top">password</td>
         <td style="vertical-align: top; word-wrap: break-word">Through password user can specify the relevent password that is used to log in to the cassandra keyspace .</td>
-        <td style="vertical-align: top">null</td>
+        <td style="vertical-align: top">The password of the keyspace</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
@@ -77,7 +77,7 @@
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span>
 ```
 define stream StockStream (symbol string, price float, volume long); 
-@Store(type="cassandra", table.name="StockTable",keyspace="AnalyticsFamily",username="cassandra",password="cassandra",cassandra.host="localhost")@IndexBy("volume")@PrimaryKey("symbol")define table StockTable (symbol string, price float, volume long); 
+@Store(type='cassandra', table.name='StockTable',keyspace='AnalyticsFamily',username='cassandra',password='cassandra',cassandra.host='localhost')@IndexBy('volume')@PrimaryKey('symbol')define table StockTable (symbol string, price float, volume long); 
 ```
 <p style="word-wrap: break-word">This definition creates an event table named <code>StockTable</code> with a column family <code>StockCF</code> on the Cassandra instance if it does not already exist (with 3 attributes named <code>symbol</code>, <code>price</code>, and <code>volume</code> of the <code>string</code>, <code>float</code> and <code>long</code> types respectively). The connection is made as specified by the parameters configured for the '@Store' annotation. The <code>symbol</code> attribute is considered a unique field, and the values for this attribute are the Cassandra row IDs.</p>
 

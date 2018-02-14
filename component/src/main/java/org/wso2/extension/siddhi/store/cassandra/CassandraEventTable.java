@@ -148,14 +148,14 @@ import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
                                 "that is used to log in to the cassandra keyspace .",
                         type = {DataType.STRING},
                         optional = true,
-                        defaultValue = "null"
+                        defaultValue = "The username of the keyspace"
                 ),
                 @Parameter(name = "password",
                         description = "Through password user can specify the relevent password " +
                                 "that is used to log in to the cassandra keyspace .",
                         type = {DataType.STRING},
                         optional = true,
-                        defaultValue = "null"
+                        defaultValue = "The password of the keyspace"
                 )
         },
         examples = {

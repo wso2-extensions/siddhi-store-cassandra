@@ -21,7 +21,8 @@ package org.wso2.extension.siddhi.store.cassandra.exception;
 import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
 
 /**
- * Class for representing a custom exception that could be thrown by the Cassandra store. This is an unchecked exception.
+ * Class for representing a custom exception that could be thrown by the Cassandra store.
+ * This is an unchecked exception.
  */
 public class CassandraTableException extends SiddhiAppCreationException {
 
