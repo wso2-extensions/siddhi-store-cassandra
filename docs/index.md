@@ -10,6 +10,8 @@ Find some useful links below:
 
 ## Latest API Docs 
 
+Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.0.0">1.0.0</a>.
+
 ## Prerequisites
 
  * A Cassandra server instance should be started and available for connection via the DataStax Java API.
@@ -46,7 +48,7 @@ Find some useful links below:
 
 ## Features
 
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.0.0-SNAPSHOT/#cassansra-store">cassandra</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#stores">Store</a>)*<br><div style="padding-left: 1em;"><p>This extension assigns data sources and connection instructions to event tables. It also implements read write operations on connected datasources</p></div>
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.0.0/#cassandra-store">cassandra</a> *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#store">(Store)</a>*<br><div style="padding-left: 1em;"><p>This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p></div>
 
 ## How to Contribute
  
