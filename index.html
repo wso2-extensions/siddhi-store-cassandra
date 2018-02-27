@@ -262,6 +262,18 @@
 
 
   <li class="md-nav__item">
+    <a href="api/1.0.1/" title="1.0.1" class="md-nav__link">
+      1.0.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="api/1.0.0/" title="1.0.0" class="md-nav__link">
       1.0.0
     </a>
@@ -385,7 +397,7 @@ Find some useful links below:</p>
 <li><a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/issues">Issue tracker</a></li>
 </ul>
 <h2 id="latest-api-docs">Latest API Docs</h2>
-<p>Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.0.0">1.0.0</a>.</p>
+<p>Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.0.1">1.0.1</a>.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
 <li>A Cassandra server instance should be started and available for connection via the DataStax Java API.</li>
@@ -399,6 +411,9 @@ Find some useful links below:</p>
 <li>
 <p>This extension is shipped out-of-the-box with WSO2 Stream Processor, if you wish to use an alternative version of this extension you can replace the component <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/releases">jar</a> that can be found in the <code>&lt;STREAM_PROCESSOR_HOME&gt;/lib</code> directory.</p>
 </li>
+<li>
+<p>When running the product make sure to insert the DataStax Java Driver For Apache Cassandra to <code>&lt;STREAM_PROCESSOR_HOME&gt;/lib</code> directory.</p>
+</li>
 </ul>
 <p><strong>Using the extension as a <a target="_blank" href="https://wso2.github.io/siddhi/documentation/running-as-a-java-library">java library</a></strong></p>
 <ul>
@@ -411,6 +426,24 @@ Find some useful links below:</p>
      &lt;/dependency&gt;
 </code></pre>
 
+<p><strong>Special notes</strong></p>
+<ul>
+<li>
+<p>In case of using search, make sure to include the primary key of the data containing column. If the primary 
+key is not declared by the user the performance of the Siddhi search query will be reduced.</p>
+</li>
+<li>
+<p>In case of deleting data from the store, including primary key will increase the efficiency of the Siddhi query.
+Otherwise whole entire table will be searched and then found rows will be deleted, which will effect the 
+performance of the query.</p>
+</li>
+<li>
+<p>The same scenario applies in updating and update or insert operations.</p>
+</li>
+<li>
+<p>Make sure to build a proper Cassandra cluster with configured hosts.</p>
+</li>
+</ul>
 <h2 id="jenkins-build-status">Jenkins Build Status</h2>
 <hr />
 <table>
@@ -430,7 +463,7 @@ Find some useful links below:</p>
 <hr />
 <h2 id="features">Features</h2>
 <ul>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.0.0/#cassandra-store">cassandra</a> <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#store">(Store)</a></em><br><div style="padding-left: 1em;"><p>This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p></div></li>
+<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.0.1/#cassandra-store">cassandra</a> <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#store">(Store)</a></em><br><div style="padding-left: 1em;"><p>This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p></div></li>
 </ul>
 <h2 id="how-to-contribute">How to Contribute</h2>
 <ul>
@@ -480,13 +513,13 @@ Find some useful links below:</p>
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="api/1.0.0/" title="1.0.0" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="api/1.0.1/" title="1.0.1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                1.0.0
+                1.0.1
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

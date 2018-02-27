@@ -183,6 +183,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../1.0.1/" title="1.0.1" class="md-nav__link">
+      1.0.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../1.0.0/" title="1.0.0" class="md-nav__link">
       1.0.0
     </a>
@@ -310,7 +322,7 @@
               
                 
                 
-                <h1 id="api-docs-v100">API Docs - v1.0.0</h1>
+                <h1 id="api-docs-v101">API Docs - v1.0.1</h1>
 <h2 id="store">Store</h2>
 <h3 id="cassandra-store">cassandra <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#store">(Store)</a></em></h3>
 <p style="word-wrap: break-word">This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p>
@@ -386,7 +398,7 @@
 @Store(type='cassandra', column.family='StockTable',keyspace='AnalyticsFamily',username='cassandra',password='cassandra',cassandra.host='localhost')@IndexBy('volume')@PrimaryKey('symbol')define table StockTable (symbol string, price float, volume long); 
 </code></pre>
 
-<p style="word-wrap: break-word">This definition creates an event table named <code>StockTable</code> with a column family <code>StockCF</code> on the Cassandra instance if it does not already exist (with 3 attributes named <code>symbol</code>, <code>price</code>, and <code>volume</code> of the <code>string</code>, <code>float</code> and <code>long</code> types respectively). The connection is made as specified by the parameters configured for the '@Store' annotation. The <code>symbol</code> attribute is considered a unique field, and the values for this attribute are the Cassandra row IDs.</p>
+<p style="word-wrap: break-word">This definition creates an event table named <code>StockTable</code> in the AnalyticsFamily keyspace on the Cassandra instance if it does not already exist (with 3 attributes named <code>symbol</code>, <code>price</code>, and <code>volume</code> of the <code>string</code>, <code>float</code> and <code>long</code> types respectively). The connection is made as specified by the parameters configured for the '@Store' annotation. The <code>symbol</code> attribute is considered a unique field, and the values for this attribute are the Cassandra row IDs.</p>
                 
                   
                 
