@@ -24,6 +24,8 @@ Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/si
 
 * This extension is shipped out-of-the-box with WSO2 Stream Processor, if you wish to use an alternative version of this extension you can replace the component <a target="_blank" href="https://github.com/wso2-extensions/siddhi-store-cassandra/releases">jar</a> that can be found in the `<STREAM_PROCESSOR_HOME>/lib` directory.
 
+* When running the product make sure to insert the DataStax Java Driver For Apache Cassandra to `<STREAM_PROCESSOR_HOME>/lib` directory.
+
 **Using the extension as a <a target="_blank" href="https://wso2.github.io/siddhi/documentation/running-as-a-java-library">java library</a>**
 
 * This extension can be added as a maven dependency along with other Siddhi dependencies to your project.
@@ -35,6 +37,18 @@ Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/si
         <version>x.x.x</version>
      </dependency>
 ```
+**Special notes**
+
+* In case of using search, make sure to include the primary key of the data containing column. If the primary 
+key is not declared by the user the performance of the Siddhi search query will be reduced.
+
+* In case of deleting data from the store, including primary key will increase the efficiency of the Siddhi query.
+Otherwise whole entire table will be searched and then found rows will be deleted, which will effect the 
+performance of the query.
+
+* The same scenario applies in updating and update or insert operations.
+
+* Make sure to build a proper Cassandra cluster with configured hosts.
 
 ## Jenkins Build Status
 

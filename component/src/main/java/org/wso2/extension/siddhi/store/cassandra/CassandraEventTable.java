@@ -167,9 +167,9 @@ import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
                                 "@IndexBy(\'volume\')" +
                                 "@PrimaryKey(\'symbol\')" +
                                 "define table StockTable (symbol string, price float, volume long); ",
-                        description = "This definition creates an event table named `StockTable` with a column " +
-                                "family `StockCF` on the Cassandra instance if it does not already exist (with 3 " +
-                                "attributes named `symbol`, `price`, and `volume` of the `string`, " +
+                        description = "This definition creates an event table named `StockTable` in the " +
+                                "AnalyticsFamily keyspace on the Cassandra instance if it does not already exist " +
+                                "(with 3 attributes named `symbol`, `price`, and `volume` of the `string`, " +
                                 "`float` and `long` types respectively). The connection is made as specified by the " +
                                 "parameters configured for the '@Store' annotation. The `symbol` attribute is " +
                                 "considered a unique field, and the values for this attribute are the " +
