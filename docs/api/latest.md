@@ -1,4 +1,4 @@
-# API Docs - v1.0.2
+# API Docs - v1.0.3-SNAPSHOT
 
 ## Store
 
@@ -41,7 +41,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">client.port</td>
-        <td style="vertical-align: top; word-wrap: break-word">Client port that is used to get connected with the client store. If no name is specified via this parameter, the default port will be taken.</td>
+        <td style="vertical-align: top; word-wrap: break-word">Client port that is used to get connected with the client store. If no name is specified via this parameter, the default port is taken.</td>
         <td style="vertical-align: top">9042</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -50,7 +50,7 @@
     <tr>
         <td style="vertical-align: top">keyspace</td>
         <td style="vertical-align: top; word-wrap: break-word">User need to give the keyspace that the data is persisted. Keyspace name is specified via this parameter.</td>
-        <td style="vertical-align: top">'cassandraTestTable'</td>
+        <td style="vertical-align: top">cassandraTestTable</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
         <td style="vertical-align: top">No</td>

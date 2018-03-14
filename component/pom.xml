@@ -248,12 +248,7 @@
                             org.wso2.extension.siddhi.store.cassandra.*
                         </Export-Package>
                         <Import-Package>
-                            com.datastax.driver.core.*;version="${cassandra.diver.version.range}",
-                            org.wso2.siddhi.annotation.*;version="${siddhi.annotation.version.range}",
-                            javax.xml.*;version="0.0.0",
-                            org.apache.log4j;version="${aparche.log4j.version.range}",
-                            org.wso2.siddhi.core.*;version="${siddhi.core.version.range}",
-                            org.wso2.siddhi.query.*;version="${siddhi.query.version.range}"
+                            *;resolution:=optional
                         </Import-Package>
                         <Include-Resource>
                             META-INF=target/classes/META-INF,

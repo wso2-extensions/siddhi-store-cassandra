@@ -134,7 +134,7 @@ import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
                         defaultValue = "The table name defined in the Siddhi Application query."),
                 @Parameter(name = "client.port",
                         description = "Client port that is used to get connected with the client store. If no " +
-                                "name is specified via this parameter, the default port will be taken.",
+                                "name is specified via this parameter, the default port is taken.",
                         type = {DataType.STRING},
                         optional = true,
                         defaultValue = "9042"),
@@ -142,7 +142,7 @@ import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
                         description = "User need to give the keyspace that the data is persisted. " +
                                 "Keyspace name is specified via this parameter.",
                         type = {DataType.STRING},
-                        defaultValue = "'cassandraTestTable'"),
+                        defaultValue = "cassandraTestTable"),
                 @Parameter(name = "username",
                         description = "Through user name user can specify the relevent username " +
                                 "that is used to log in to the cassandra keyspace .",
