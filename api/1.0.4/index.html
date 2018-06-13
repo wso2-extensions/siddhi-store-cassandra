@@ -16,7 +16,7 @@
     
     
       
-        <title>1.0.0 - Siddhi-Store-Cassandra</title>
+        <title>1.0.4 - Siddhi-Store-Cassandra</title>
       
     
     
@@ -84,7 +84,7 @@
                 </span>
               
             
-            1.0.0
+            1.0.4
           
         </span>
       </div>
@@ -181,11 +181,60 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../1.0.4/" title="1.0.4" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        1.0.4
+      </label>
+    
+    <a href="./" title="1.0.4" class="md-nav__link md-nav__link--active">
       1.0.4
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#store" title="Store" class="md-nav__link">
+    Store
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cassandra-store" title="cassandra (Store)" class="md-nav__link">
+    cassandra (Store)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -229,60 +278,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        1.0.0
-      </label>
-    
-    <a href="./" title="1.0.0" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../1.0.0/" title="1.0.0" class="md-nav__link">
       1.0.0
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#store" title="Store" class="md-nav__link">
-    Store
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cassandra-store" title="cassandra (Store)" class="md-nav__link">
-    cassandra (Store)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -358,7 +358,7 @@
               
                 
                 
-                <h1 id="api-docs-v100">API Docs - v1.0.0</h1>
+                <h1 id="api-docs-v104">API Docs - v1.0.4</h1>
 <h2 id="store">Store</h2>
 <h3 id="cassandra-store">cassandra <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#store">(Store)</a></em></h3>
 <p style="word-wrap: break-word">This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p>
@@ -397,7 +397,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">client.port</td>
-        <td style="vertical-align: top; word-wrap: break-word">Client port that is used to get connected with the client store. If no name is specified via this parameter, the default port will be taken.</td>
+        <td style="vertical-align: top; word-wrap: break-word">Client port that is used to get connected with the client store. If no name is specified via this parameter, the default port is taken.</td>
         <td style="vertical-align: top">9042</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -406,7 +406,7 @@
     <tr>
         <td style="vertical-align: top">keyspace</td>
         <td style="vertical-align: top; word-wrap: break-word">User need to give the keyspace that the data is persisted. Keyspace name is specified via this parameter.</td>
-        <td style="vertical-align: top">'cassandraTestTable'</td>
+        <td style="vertical-align: top">cassandraTestTable</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
         <td style="vertical-align: top">No</td>
@@ -434,7 +434,7 @@
 @Store(type='cassandra', column.family='StockTable',keyspace='AnalyticsFamily',username='cassandra',password='cassandra',cassandra.host='localhost')@IndexBy('volume')@PrimaryKey('symbol')define table StockTable (symbol string, price float, volume long); 
 </code></pre>
 
-<p style="word-wrap: break-word">This definition creates an event table named <code>StockTable</code> with a column family <code>StockCF</code> on the Cassandra instance if it does not already exist (with 3 attributes named <code>symbol</code>, <code>price</code>, and <code>volume</code> of the <code>string</code>, <code>float</code> and <code>long</code> types respectively). The connection is made as specified by the parameters configured for the '@Store' annotation. The <code>symbol</code> attribute is considered a unique field, and the values for this attribute are the Cassandra row IDs.</p>
+<p style="word-wrap: break-word">This definition creates an event table named <code>StockTable</code> in the AnalyticsFamily keyspace on the Cassandra instance if it does not already exist (with 3 attributes named <code>symbol</code>, <code>price</code>, and <code>volume</code> of the <code>string</code>, <code>float</code> and <code>long</code> types respectively). The connection is made as specified by the parameters configured for the '@Store' annotation. The <code>symbol</code> attribute is considered a unique field, and the values for this attribute are the Cassandra row IDs.</p>
                 
                   
                 
@@ -453,7 +453,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../1.0.1/" title="1.0.1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../.." title="Welcome to WSO2 Siddhi Store Cassandra" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -462,19 +462,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                1.0.1
+                Welcome to WSO2 Siddhi Store Cassandra
               </span>
             </div>
           </a>
         
         
-          <a href="../latest/" title="latest" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../1.0.3/" title="1.0.3" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                latest
+                1.0.3
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
