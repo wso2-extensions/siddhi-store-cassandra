@@ -27,7 +27,7 @@
 
     <groupId>org.wso2.extension.siddhi.store.cassandra</groupId>
     <artifactId>siddhi-store-cassandra-parent</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WSO2 Siddhi Store Extension - Cassandra Parent pom</name>
     <url>http://wso2.org</url>
@@ -60,7 +60,7 @@
         <url>https://github.com/wso2-extensions/siddhi-store-cassandra.git</url>
         <developerConnection>scm:git:https://github.com/wso2-extensions/siddhi-store-cassandra.git
         </developerConnection>
-        <tag>v1.1.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencyManagement>
