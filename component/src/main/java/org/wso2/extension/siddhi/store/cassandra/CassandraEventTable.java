@@ -1,20 +1,20 @@
 /*
-*  Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-*
-*  WSO2 Inc. licenses this file to you under the Apache License,
-*  Version 2.0 (the "License"); you may not use this file except
-*  in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing,
-* software distributed under the License is distributed on an
-* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-* KIND, either express or implied.  See the License for the
-* specific language governing permissions and limitations
-* under the License.
-*/
+ *  Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *  WSO2 Inc. licenses this file to you under the Apache License,
+ *  Version 2.0 (the "License"); you may not use this file except
+ *  in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 
 package org.wso2.extension.siddhi.store.cassandra;
 
@@ -27,8 +27,24 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 
 import com.datastax.driver.core.exceptions.NoHostAvailableException;
+import io.siddhi.annotation.Example;
+import io.siddhi.annotation.Extension;
+import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.util.DataType;
+import io.siddhi.core.exception.CannotLoadConfigurationException;
+import io.siddhi.core.exception.ConnectionUnavailableException;
+import io.siddhi.core.table.record.AbstractRecordTable;
+import io.siddhi.core.table.record.ExpressionBuilder;
+import io.siddhi.core.table.record.RecordIterator;
+import io.siddhi.core.util.SiddhiConstants;
+import io.siddhi.core.util.collection.operator.CompiledCondition;
+import io.siddhi.core.util.collection.operator.CompiledExpression;
+import io.siddhi.core.util.config.ConfigReader;
+import io.siddhi.query.api.annotation.Annotation;
+import io.siddhi.query.api.definition.Attribute;
+import io.siddhi.query.api.definition.TableDefinition;
+import io.siddhi.query.api.util.AnnotationHelper;
 import org.apache.log4j.Logger;
-
 import org.wso2.extension.siddhi.store.cassandra.condition.CassandraCompiledCondition;
 import org.wso2.extension.siddhi.store.cassandra.condition.CassandraConditionVisitor;
 import org.wso2.extension.siddhi.store.cassandra.config.CassandraStoreConfig;
@@ -37,29 +53,11 @@ import org.wso2.extension.siddhi.store.cassandra.util.CassandraTableUtils;
 import org.wso2.extension.siddhi.store.cassandra.util.Constant;
 import org.wso2.extension.siddhi.store.cassandra.util.TableMeta;
 import org.wso2.extension.siddhi.store.cassandra.util.iterator.CassandraIterator;
-import org.wso2.siddhi.annotation.Example;
-import org.wso2.siddhi.annotation.Extension;
-import org.wso2.siddhi.annotation.Parameter;
-import org.wso2.siddhi.annotation.util.DataType;
-import org.wso2.siddhi.core.exception.CannotLoadConfigurationException;
-import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
-import org.wso2.siddhi.core.table.record.AbstractRecordTable;
-import org.wso2.siddhi.core.table.record.ExpressionBuilder;
-import org.wso2.siddhi.core.table.record.RecordIterator;
-import org.wso2.siddhi.core.util.SiddhiConstants;
-import org.wso2.siddhi.core.util.collection.operator.CompiledCondition;
-import org.wso2.siddhi.core.util.collection.operator.CompiledExpression;
-import org.wso2.siddhi.core.util.config.ConfigReader;
-import org.wso2.siddhi.query.api.annotation.Annotation;
-import org.wso2.siddhi.query.api.definition.Attribute;
-import org.wso2.siddhi.query.api.definition.TableDefinition;
-import org.wso2.siddhi.query.api.util.AnnotationHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-
 import java.nio.ByteBuffer;
 
 import java.util.ArrayList;
@@ -71,6 +69,8 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static io.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
 
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.ANNOTATION_CLIENT_PORT;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.ANNOTATION_ELEMENT_KEY_SPACE;
@@ -110,7 +110,6 @@ import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTable
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.TABLE_PROPERTY_TYPE;
 import static org.wso2.extension.siddhi.store.cassandra.util.CassandraEventTableConstants.WHITESPACE;
 
-import static org.wso2.siddhi.core.util.SiddhiConstants.ANNOTATION_STORE;
 
 /**
  * Class representing the Cassandra Event Table implementation.
@@ -193,7 +192,7 @@ public class CassandraEventTable extends AbstractRecordTable {
     private String updateQuery;
     private Annotation indexAnnotation;
     private boolean noKeyTable;              // To check whether table does not have primary key and if it has primary
-                                            // keys check the are matching with the persisted primary keys
+    // keys check the are matching with the persisted primary keys
     private Map<String, String> persistedKeyColumns; // column name -> data type
     private CassandraStoreConfig cassandraStoreConfig;
     private List<String> indexes;
@@ -542,7 +541,7 @@ public class CassandraEventTable extends AbstractRecordTable {
      * @param conditionParameterMap the compiledCondition against which records should be matched
      */
     private List<String> findAllIDs(CompiledCondition compiledCondition,
-                                         Map<String, Object> conditionParameterMap) {
+                                    Map<String, Object> conditionParameterMap) {
         String compiledQuery = ((CassandraCompiledCondition) compiledCondition).getCompiledQuery();
         String finalSearchQuery = cassandraStoreConfig.getRecordSelectNoKeyTable().
                 replace(PLACEHOLDER_KEYSPACE, keyspace).replace(PLACEHOLDER_TABLE, tableName).
@@ -563,7 +562,7 @@ public class CassandraEventTable extends AbstractRecordTable {
      * @param conditionParameterMap the compiledCondition against which records should be matched
      */
     private List<Object[]> findAllUserDefinedIDs(CompiledCondition compiledCondition,
-                                                      Map<String, Object> conditionParameterMap) {
+                                                 Map<String, Object> conditionParameterMap) {
         // constructs the values to be extracted fro the relevent table
         // eg - select val1,val2,val3
         StringBuilder keyValueSelector = new StringBuilder();
@@ -903,7 +902,7 @@ public class CassandraEventTable extends AbstractRecordTable {
 
     /**
      * This function is used in generating the value statement and the question marks to be used in prepared
-        statement and detecting object attributes
+     statement and detecting object attributes
      */
     private void buildInsertAndSelectQuery() {
         int i = 0;
@@ -955,7 +954,7 @@ public class CassandraEventTable extends AbstractRecordTable {
             createTable();
         } else if (!isTableWithDefinedColumns()) {
             throw new CassandraTableException("Problem with the table definition or key. " +
-                        "Please re check the table schema and try again.");
+                    "Please re check the table schema and try again.");
         }
         //Otherwise table is already created.
     }
@@ -1139,15 +1138,15 @@ public class CassandraEventTable extends AbstractRecordTable {
         String[] derivedIndexes = indexAnnotation.getElements().get(0).getValue().split(SEPARATOR);
         this.indexes = new ArrayList<>();
         Arrays.stream(derivedIndexes).forEach(index ->
-            schema.stream()
-                    .filter(attribute -> attribute.getName().trim().equals(index))
-                    .forEach(attribute -> {
-                        String indexQuery = cassandraStoreConfig.getIndexQuery().
-                                replace(PLACEHOLDER_KEYSPACE, keyspace).replace(PLACEHOLDER_TABLE, tableName).
-                                replace(PLACEHOLDER_INDEX, index);
-                        session.execute(indexQuery);
-                        this.indexes.add(index);
-                    })
+                schema.stream()
+                        .filter(attribute -> attribute.getName().trim().equals(index))
+                        .forEach(attribute -> {
+                            String indexQuery = cassandraStoreConfig.getIndexQuery().
+                                    replace(PLACEHOLDER_KEYSPACE, keyspace).replace(PLACEHOLDER_TABLE, tableName).
+                                    replace(PLACEHOLDER_INDEX, index);
+                            session.execute(indexQuery);
+                            this.indexes.add(index);
+                        })
         );
     }
 }
