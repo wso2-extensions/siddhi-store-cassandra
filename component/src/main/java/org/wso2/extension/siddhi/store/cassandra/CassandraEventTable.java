@@ -44,7 +44,8 @@ import io.siddhi.query.api.annotation.Annotation;
 import io.siddhi.query.api.definition.Attribute;
 import io.siddhi.query.api.definition.TableDefinition;
 import io.siddhi.query.api.util.AnnotationHelper;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.wso2.extension.siddhi.store.cassandra.condition.CassandraCompiledCondition;
 import org.wso2.extension.siddhi.store.cassandra.condition.CassandraConditionVisitor;
 import org.wso2.extension.siddhi.store.cassandra.config.CassandraStoreConfig;
@@ -198,7 +199,7 @@ public class CassandraEventTable extends AbstractRecordTable {
     private List<String> indexes;
     private int port;
 
-    private static final Logger LOG = Logger.getLogger(CassandraEventTable.class);
+    private static final Logger LOG = LogManager.getLogger(CassandraEventTable.class);
 
     @Override
     protected void init(TableDefinition tableDefinition, ConfigReader configReader) {

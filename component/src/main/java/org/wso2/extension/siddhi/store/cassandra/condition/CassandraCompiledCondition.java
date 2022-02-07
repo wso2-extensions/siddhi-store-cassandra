@@ -28,6 +28,7 @@ import java.util.SortedMap;
  * states to be used at runtime.
  */
 public class CassandraCompiledCondition implements CompiledCondition {
+    private static final long serialVersionUID = 1L;
     private String compiledQuery;
     private SortedMap<Integer, Object> parameters;
     private boolean readOnlyCondition;

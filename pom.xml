@@ -37,9 +37,9 @@
     </modules>
 
     <properties>
-        <siddhi.version>5.0.0</siddhi.version>
+        <siddhi.version>5.1.21</siddhi.version>
         <siddhi.version.range>[5.0.0,6.0.0)</siddhi.version.range>
-        <log4j.version>1.2.17.wso2v1</log4j.version>
+        <log4j.version>2.17.1</log4j.version>
         <testng.version>6.9.10</testng.version>
         <commons.logging.version>1.1.1</commons.logging.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
@@ -50,7 +50,7 @@
         <siddhi.annotation.version.range>[4.0,5.0)</siddhi.annotation.version.range>
         <siddhi.core.version.range>[4.0,5.0)</siddhi.core.version.range>
         <siddhi.query.version.range>[4.0,5.0)</siddhi.query.version.range>
-        <aparche.log4j.version.range>[1.0,2.0)</aparche.log4j.version.range>
+        <aparche.log4j.version.range>[2.0,3.0)</aparche.log4j.version.range>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -77,8 +77,8 @@
                 <version>${siddhi.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.log4j.wso2</groupId>
-                <artifactId>log4j</artifactId>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
                 <exclusions>
                     <exclusion>
