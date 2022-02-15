@@ -10,7 +10,7 @@ Find some useful links below:
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/2.0.0">2.0.0</a>.
+Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/2.0.1">2.0.1</a>.
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ performance of the query.
 
 ## Features
 
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/2.0.0/#cassandra-store">cassandra</a> *<a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#store">(Store)</a>*<br><div style="padding-left: 1em;"><p>This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p></div>
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/2.0.1/#cassandra-store">cassandra</a> *(<a target="_blank" href="http://siddhi.io/en/v5.1/docs/query-guide/#store">Store</a>)*<br> <div style="padding-left: 1em;"><p><p style="word-wrap: break-word;margin: 0;">This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p></p></div>
 
 ## How to Contribute
  
