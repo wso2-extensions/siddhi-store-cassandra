@@ -13,7 +13,7 @@
         <meta name="description" content="Siddhi Store Cassandra Extension">
       
       
-        <link rel="canonical" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/1.1.0/">
+        <link rel="canonical" href="https://wso2-extensions.github.io/siddhi-store-cassandra/api/2.0.1/">
       
       
         <meta name="author" content="WSO2">
@@ -42,7 +42,7 @@
     
     
       
-        <title>1.1.0 - Siddhi Store Cassandra</title>
+        <title>2.0.1 - Siddhi Store Cassandra</title>
       
     
     
@@ -118,7 +118,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#api-docs-v110" tabindex="1" class="md-skip">
+      <a href="#api-docs-v201" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -144,7 +144,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                1.1.0
+                2.0.1
               
             </span>
           
@@ -298,42 +298,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../2.0.1/" title="2.0.1" class="md-nav__link">
-      2.0.1
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../2.0.0/" title="2.0.0" class="md-nav__link">
-      2.0.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../1.1.1/" title="1.1.1" class="md-nav__link">
-      1.1.1
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -345,11 +309,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        1.1.0
+        2.0.1
       </label>
     
-    <a href="./" title="1.1.0" class="md-nav__link md-nav__link--active">
-      1.1.0
+    <a href="./" title="2.0.1" class="md-nav__link md-nav__link--active">
+      2.0.1
     </a>
     
       
@@ -390,6 +354,42 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.0.0/" title="2.0.0" class="md-nav__link">
+      2.0.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.1.1/" title="1.1.1" class="md-nav__link">
+      1.1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.1.0/" title="1.1.0" class="md-nav__link">
+      1.1.0
+    </a>
   </li>
 
         
@@ -574,15 +574,20 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/wso2-extensions/siddhi-store-cassandra/edit/master/docs/api/1.1.0.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/wso2-extensions/siddhi-store-cassandra/edit/master/docs/api/2.0.1.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="api-docs-v110">API Docs - v1.1.0<a class="headerlink" href="#api-docs-v110" title="Permanent link">&para;</a></h1>
+                <h1 id="api-docs-v201">API Docs - v2.0.1<a class="headerlink" href="#api-docs-v201" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Tested Siddhi Core version: <em><a target="_blank" href="http://siddhi.io/en/v5.1/docs/query-guide/">5.1.21</a></em></p>
+<p>It could also support other Siddhi Core minor versions.</p>
+</div>
 <h2 id="store">Store<a class="headerlink" href="#store" title="Permanent link">&para;</a></h2>
-<h3 id="cassandra-store">cassandra <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#store">(Store)</a></em><a class="headerlink" href="#cassandra-store" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<h3 id="cassandra-store">cassandra <em><a target="_blank" href="http://siddhi.io/en/v5.1/docs/query-guide/#store">(Store)</a></em><a class="headerlink" href="#cassandra-store" title="Permanent link">&para;</a></h3>
+<p><p></p>
+<p style="word-wrap: break-word;margin: 0;">This extension assigns data sources and connection instructions to event tables. It also implements read-write operations on connected datasource.</p>
+<p></p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
 <div class="codehilite"><pre><span></span>@Store(type=&quot;cassandra&quot;, cassandra.host=&quot;&lt;STRING&gt;&quot;, column.family=&quot;&lt;STRING&gt;&quot;, client.port=&quot;&lt;STRING&gt;&quot;, keyspace=&quot;&lt;STRING&gt;&quot;, username=&quot;&lt;STRING&gt;&quot;, password=&quot;&lt;STRING&gt;&quot;)
 @PrimaryKey(&quot;PRIMARY_KEY&quot;)
 @Index(&quot;INDEX&quot;)
@@ -601,7 +606,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">cassandra.host</td>
-        <td style="vertical-align: top; word-wrap: break-word">Host that is used to get connected in to the cassandra keyspace.</td>
+        <td style="vertical-align: top; word-wrap: break-word"><p style="word-wrap: break-word;margin: 0;">Host that is used to get connected in to the cassandra keyspace.</p></td>
         <td style="vertical-align: top">localhost</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
@@ -609,7 +614,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">column.family</td>
-        <td style="vertical-align: top; word-wrap: break-word">The name with which the event table should be persisted in the store. If no name is specified via this parameter, the event table is persisted with the same name as the Siddhi table.</td>
+        <td style="vertical-align: top; word-wrap: break-word"><p style="word-wrap: break-word;margin: 0;">The name with which the event table should be persisted in the store. If no name is specified via this parameter, the event table is persisted with the same name as the Siddhi table.</p></td>
         <td style="vertical-align: top">The table name defined in the Siddhi Application query.</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -617,7 +622,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">client.port</td>
-        <td style="vertical-align: top; word-wrap: break-word">Client port that is used to get connected with the client store. If no name is specified via this parameter, the default port is taken.</td>
+        <td style="vertical-align: top; word-wrap: break-word"><p style="word-wrap: break-word;margin: 0;">Client port that is used to get connected with the client store. If no name is specified via this parameter, the default port is taken.</p></td>
         <td style="vertical-align: top">9042</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -625,7 +630,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">keyspace</td>
-        <td style="vertical-align: top; word-wrap: break-word">User need to give the keyspace that the data is persisted. Keyspace name is specified via this parameter.</td>
+        <td style="vertical-align: top; word-wrap: break-word"><p style="word-wrap: break-word;margin: 0;">User need to give the keyspace that the data is persisted. Keyspace name is specified via this parameter.</p></td>
         <td style="vertical-align: top">cassandraTestTable</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
@@ -633,7 +638,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">username</td>
-        <td style="vertical-align: top; word-wrap: break-word">Through user name user can specify the relevent username that is used to log in to the cassandra keyspace .</td>
+        <td style="vertical-align: top; word-wrap: break-word"><p style="word-wrap: break-word;margin: 0;">Through user name user can specify the relevent username that is used to log in to the cassandra keyspace .</p></td>
         <td style="vertical-align: top">The username of the keyspace</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -641,7 +646,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">password</td>
-        <td style="vertical-align: top; word-wrap: break-word">Through password user can specify the relevent password that is used to log in to the cassandra keyspace .</td>
+        <td style="vertical-align: top; word-wrap: break-word"><p style="word-wrap: break-word;margin: 0;">Through password user can specify the relevent password that is used to log in to the cassandra keyspace .</p></td>
         <td style="vertical-align: top">The password of the keyspace</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -655,7 +660,11 @@
 </pre></div>
 
 
-<p style="word-wrap: break-word">This definition creates an event table named <code>StockTable</code> in the AnalyticsFamily keyspace on the Cassandra instance if it does not already exist (with 3 attributes named <code>symbol</code>, <code>price</code>, and <code>volume</code> of the <code>string</code>, <code>float</code> and <code>long</code> types respectively). The connection is made as specified by the parameters configured for the '@Store' annotation. The <code>symbol</code> attribute is considered a unique field, and the values for this attribute are the Cassandra row IDs.</p>
+<p></p>
+
+<p style="word-wrap: break-word;margin: 0;">This definition creates an event table named <code>StockTable</code> in the AnalyticsFamily keyspace on the Cassandra instance if it does not already exist (with 3 attributes named <code>symbol</code>, <code>price</code>, and <code>volume</code> of the <code>string</code>, <code>float</code> and <code>long</code> types respectively). The connection is made as specified by the parameters configured for the '@Store' annotation. The <code>symbol</code> attribute is considered a unique field, and the values for this attribute are the Cassandra row IDs.</p>
+
+<p></p>
                 
                   
                 
@@ -676,7 +685,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../1.1.1/" title="1.1.1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../latest/" title="latest" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -685,19 +694,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                1.1.1
+                latest
               </span>
             </div>
           </a>
         
         
-          <a href="../1.0.8/" title="1.0.8" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../2.0.0/" title="2.0.0" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                1.0.8
+                2.0.0
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
