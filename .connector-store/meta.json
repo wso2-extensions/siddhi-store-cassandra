@@ -1,0 +1,14 @@
+{
+    "name": "cassandra",
+    "owner": "WSO2",
+    "category": "Siddhi Store",
+    "documentationUrl": "https://wso2-extensions.github.io/siddhi-store-cassandra/",
+    "description": "The siddhi-store-cassandra extension is an extension to Siddhi that can be used to persist events to a Cassandra instance of the users choice. ",
+    "status": "Active",
+    "labels": [
+        "siddhi",
+        "siddhi-store",
+        "cassandra"
+    ],
+    "releases": []
+}
