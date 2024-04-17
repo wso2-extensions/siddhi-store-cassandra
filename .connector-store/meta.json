@@ -10,5 +10,10 @@
         "siddhi-store",
         "cassandra"
     ],
-    "releases": []
+    "releases": [
+        {
+            "tagName": "1.1.1",
+            "products": []
+        }
+    ]
 }
