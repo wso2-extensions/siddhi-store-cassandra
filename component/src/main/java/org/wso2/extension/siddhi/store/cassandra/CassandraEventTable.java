@@ -453,7 +453,7 @@ public class CassandraEventTable extends AbstractRecordTable {
         // NoHostAvailableException: All host(s) tried for query failed   when the connection is not established..
         // Runtime error thrown
         checkTable();
-        LOG.info("Store " + keyspace + "." + tableName + " is initialized");
+        LOG.info("Store {}.{} is initialized", keyspace, tableName);
     }
 
     @Override
@@ -684,8 +684,8 @@ public class CassandraEventTable extends AbstractRecordTable {
         //Since cassandra cannot update a primary key column we need to remove the primary key values sent
         for (String key : keys) {
             if (updateParameterMap.containsKey(key)) {
-                LOG.warn("Primary key " + key + " is included in the set values. Note that those values " +
-                        "are ignored in the execution in " + keyspace + "." + tableName);
+                LOG.warn("Primary key {} is included in the set values. Note that those values are ignored in " +
+                                "the execution in {}.{}", key, keyspace, tableName);
                 updateParameterMap.remove(key);
             }
         }
@@ -762,8 +762,8 @@ public class CassandraEventTable extends AbstractRecordTable {
         //Since cassandra cannot update a primary key column we need to remove the primary key values sent
         for (String key : keys) {
             if (updateSetParameterMap.containsKey(key)) {
-                LOG.warn("Primary key " + key + " is included in the set values. Note that those values " +
-                        "are ignored in the execution in " + keyspace + "." + tableName);
+                LOG.warn("Primary key {} is included in the set values. Note that those values are ignored " +
+                                "in the execution in {}.{}", key, keyspace, tableName);
                 updateSetParameterMap.remove(key);
             }
         }
